@@ -6,9 +6,14 @@
 
 アプリ開発におおよそ必要となる構成のテンプレートを作成しておき、すぐに本質的な開発に移れるようにします。
 
+フレームワークを使う場合に読んでおくべきURL
+
+ * [俺的Androidアプリ開発の基本方針 ver 2016.Q3](http://qiita.com/eaglesakura/items/7b5e61186c0c754c03b6)
+  * 及び[リンクされている記事](http://qiita.com/eaglesakura/items/7b5e61186c0c754c03b6#%E8%AA%AD%E3%82%93%E3%81%A7%E3%81%8A%E3%81%8F%E3%81%A8%E8%89%AF%E3%81%84%E5%8F%82%E8%80%83%E8%A8%98%E4%BA%8B)
+
 | 想定される開発ブランチ | 内容 | ビルドステータス |
 |---|---|---|
-| master | 最新ビルド（Nightly Build対象） | - |
+| master | 最新ビルド（Nightly Build対象） | [![CircleCI](https://circleci.com/gh/eaglesakura/android-app-template/tree/master.svg?style=svg)](https://circleci.com/gh/eaglesakura/android-app-template/tree/master) |
 | develop | 最新の開発版, DEBUG版デプロイ用 | - |
 | feature/id/{issue num} | issue対応 | - |
 | v${バージョン名} | リリースビルド | - |
