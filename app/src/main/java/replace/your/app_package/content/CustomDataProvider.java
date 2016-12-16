@@ -37,6 +37,6 @@ public class CustomDataProvider extends ApplicationDataProvider {
     public static final String PROPERTY_STOREKEY_APPSETTINGS = "PROPERTY_STOREKEY_APPSETTINGS";
 
     public static Uri getPropertyUri(Context context) {
-        return Uri.parse("content://" + context.getPackageName() + ".db/property");
+        return Uri.parse("content://" + context.getPackageName() + "/property");
     }
 }
