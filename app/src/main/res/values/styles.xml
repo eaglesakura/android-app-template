@@ -1,0 +1,40 @@
+<resources>
+
+    <!--
+        アプリ標準スタイルテンプレート
+        FIXME: アプリテーマに合わせてカスタマイズする
+     -->
+    <style name="App.Theme" parent="EsMaterial.Theme">
+        <item name="colorPrimaryDark">@color/EsMaterial.Red.600</item>
+        <item name="colorPrimary">@color/EsMaterial.Red.500</item>
+        <item name="colorAccent">@color/EsMaterial.Blue.Button.Normal</item>
+        <item name="android:windowAnimationStyle">@style/EsMaterial.Animation.Activity</item>
+        <item name="drawerArrowStyle">@style/EsMaterial.Red.DrawerArrow</item>
+    </style>
+
+    <!--
+        AppBar/Toolbar領域設定
+        FIXME: アプリテーマに合わせてカスタマイズする
+    -->
+    <style name="App.Theme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColor">@color/EsMaterial.Red.50</item>
+    </style>
+    <style name="App.Theme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColor">@color/EsMaterial.Grey.800</item>
+    </style>
+
+    <!--
+        標準ボタンのカスタマイズ例
+        FIXME: アプリテーマに合わせてカスタマイズする
+     -->
+    <style name="App.Theme.Button.Normal" parent="App.Theme">
+        <item name="colorButtonNormal">@color/EsMaterial.White.Button.Normal</item>
+        <item name="android:textColor">@color/EsMaterial.Grey.800</item>
+    </style>
+
+    <style name="App.Theme.Button.Alert" parent="App.Theme">
+        <item name="colorButtonNormal">@color/EsMaterial.Red.Button.Normal</item>
+        <item name="android:textColor">@color/EsMaterial.Red.50</item>
+    </style>
+
+</resources>

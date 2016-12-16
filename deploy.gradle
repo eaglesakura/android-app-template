@@ -1,0 +1,62 @@
+buildscript {
+    repositories {
+        maven { url "http://eaglesakura.github.io/maven/" }
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.eaglesakura:plugin-ci-support:1.0.14"
+    }
+}
+
+apply plugin: 'com.eaglesakura.ci-support'
+apply plugin: 'deploygate'
+
+/**
+ * フレーバー指定でapkを検索
+ * @return 検索したAPKファイル or null
+ */
+private File getApk(String app, String flavor, String type) {
+    File dir = file("ci-release/${app}/apk/");
+    for (File file : dir.listFiles()) {
+        println "check ${file.name}"
+        if (flavor != null) {
+            if ("${app}-${flavor}-${type}.apk".toString().equals(file.name)) {
+                return file;
+            }
+        } else {
+            if ("${app}-${type}.apk".toString().equals(file.name)) {
+                return file;
+            }
+        }
+    }
+    return null;
+}
+
+deploygate {
+
+    userName = DEPLOYGATE_USER_NAME;
+    token = DEPLOYGATE_API_KEY;
+
+    apks {
+        /**
+         * googleplay debug
+         */
+        googleplayDebug {
+            sourceFile = getApk("app", null, "debug");
+            message = "for GooglePlay ${eglibrary.ci.buildDate}";
+            releaseNote = "for GooglePlay Debug ${eglibrary.ci.buildDate}";
+        }
+
+        /**
+         * googleplay release
+         */
+        googleplayRelease {
+            sourceFile = getApk("app", null, "release");
+            message = "for GooglePlay ${eglibrary.ci.buildDate}";
+            releaseNote = "for GooglePlay ${eglibrary.ci.buildDate}";
+        }
+
+    }
+}
+

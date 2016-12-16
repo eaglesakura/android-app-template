@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- エラー関連 -->
+    <string name="Title.Error.Runtime">実行時エラー</string>
+    <string name="Message.Error.Runtime">処理中に問題が発生しました</string>
+</resources>

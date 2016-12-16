@@ -1,0 +1,20 @@
+{
+  "classesOutputPath": "src/main/gen/java",
+  "configOutputPath": "src/main/res/raw",
+  "packageName": "replace.your.app_package.gen.prop",
+  "configName": "app_properties.json",
+  "groups": [
+    {
+      "comment": "デバッグ管理",
+      "name": "DebugProps",
+      "properties": [
+        {
+          "comment": "デバッグをONにする場合はtrue",
+          "type": "boolean",
+          "name": "debugEnable",
+          "value": "false"
+        }
+      ]
+    }
+  ]
+}

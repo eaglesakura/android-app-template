@@ -1,0 +1,62 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://eaglesakura.github.io/maven/" }
+    }
+    dependencies {
+        classpath "com.eaglesakura:plugin-android-dbgenerator:2.0.146"
+        classpath "com.eaglesakura:plugin-firebase-remoteconfig:1.0.36"
+    }
+}
+apply plugin: 'com.eaglesakura.android-mipmap'
+apply plugin: 'com.eaglesakura.android-props'
+
+/**
+ * mipmap生成管理
+ *
+ * ImageMagickを導入し、環境変数下記コマンドのパスを設定する
+ * $IMGMAGICK_CONVERT   convertコマンド
+ * $IMGMAGICK_IDENTIFY  identifyコマンド
+ */
+mipmap {
+    sources = file("image/");
+    output = file("src/main/res");
+    toolsPath.identify = System.getenv("IMGMAGICK_IDENTIFY");
+    toolsPath.convert = System.getenv("IMGMAGICK_CONVERT");
+    cleanOldFiles = false;
+}
+
+/**
+ * アプリのプロパティ管理
+ */
+props {
+    property file("config/app_properties.json")
+}
+
+/**
+ * Firebaseで管理されるConfigを生成する
+ */
+task generateFirebaseConfig(type: com.eaglesakura.gradle.task.FirebaseRemoteConfigGenTask) {
+    outDirectory = file("src/main/gen/java")
+    def AppStatusConfig = newConfig("${android.defaultConfig.applicationId}.gen.config.AppStatusConfig");
+    AppStatusConfig.stringConfig("database_path_config", "nil");      // Databaseのコンフィグリンク
+}
+
+/**
+ * サイクルコンピューター設定用プロファイルを出力する
+ */
+task generateDao(type: com.eaglesakura.gradle.task.AndroidDaoGenTask) {
+    outDirectory = file("src/main/gen/java")
+    classPackageBase = "${android.defaultConfig.applicationId}.gen.dao"
+
+    def schema = newSchema(1, "example");
+
+    /**
+     * 表示スロットと表示内容(対象プラグイン、表示ID)を紐付ける
+     *
+     * packageName + slotIdで一意に識別される
+     */
+    def DbExample = schema.addEntity("DbExample");
+    DbExample.addStringProperty("uniqueId").notNull().unique().index().primaryKey();
+    DbExample.addDateProperty("updatedDate").notNull();    // 更新日時
+}

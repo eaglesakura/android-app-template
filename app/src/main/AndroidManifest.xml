@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="replace.your.app_package">
+
+
+    <application
+            android:allowBackup="false"
+            android:label="@string/Env.AppName"
+            android:name="replace.your.app_package.CustomApplication"
+            android:theme="@style/App.Theme">
+
+        <!-- Google MapでAPIキーを埋め込む -->
+        <!--<meta-data android:name="com.google.android.geo.API_KEY" android:value="${google_api_key}"/>-->
+
+
+        <!-- Android Things対応アプリを作成する -->
+        <!--<uses-library android:name="com.google.android.things"/>-->
+
+        <activity android:name="replace.your.app_package.ui.navigation.ExampleActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+            <!-- Android Thingsで自動起動を行なう -->
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN"/>-->
+            <!--<category android:name="android.intent.category.IOT_LAUNCHER"/>-->
+            <!--<category android:name="android.intent.category.DEFAULT"/>-->
+            <!--</intent-filter>-->
+        </activity>
+        <!-- アプリのグローバルデータ管理用 -->
+        <provider android:authorities="${applicationId}"
+                  android:exported="false"
+                  android:process=":data"
+                  android:name="replace.your.app_package.content.CustomDataProvider"/>
+    </application>
+
+</manifest>

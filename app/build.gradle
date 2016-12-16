@@ -1,0 +1,309 @@
+/**
+ * FIXME: アプリバージョンに書き換える
+ */
+def APP_VERSION = "1.0"
+
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.eaglesakura.ci-support'
+apply plugin: 'me.tatarka.retrolambda' /* Android Lambda */
+
+configurations {
+    all*.exclude group: "com.google.code.findbugs", module: "jsr305"
+    all*.exclude group: "org.apache.httpcomponents", module: "httpclient"
+}
+
+dependencies {
+    if (!EGLIBRARY_COMPILE_LOCAL) {
+        /**
+         * 標準フレームワーク
+         */
+        compile 'com.eaglesakura:simple-logger:1.+'
+        compile 'com.eaglesakura:simple-utils:1.+'
+        compile 'com.eaglesakura:simple-serialize:1.+'
+        compile 'com.eaglesakura:android-simple-utils:1.+'
+        compile 'com.eaglesakura:android-thread:1.+'
+        compile 'com.eaglesakura:android-text-kvs:1.+'
+        compile 'com.eaglesakura:android-net:1.+'
+        compile 'com.eaglesakura:rxandroid-support:2.+'
+        compile 'com.eaglesakura:onactivityresult-invoke:1.+'
+        compile 'com.eaglesakura:greendao-wrapper:2.+'
+        compile 'com.eaglesakura:small-aquery:+'
+        compile 'com.eaglesakura:margarineknife:1.+'
+        compile 'com.eaglesakura:android-framework:2.+'
+
+        /**
+         * Optional
+         */
+//        compile 'com.eaglesakura:android-bluetooth:1.+'
+//        compile 'com.eaglesakura:android-command-service:1.+'
+//        compile 'com.eaglesakura:android-gms:1.+'
+//        compile 'com.eaglesakura:android-firebase:1.+'
+
+        /**
+         * UnitTest
+         */
+        androidTestCompile 'com.eaglesakura:android-devicetest-support:2.+'
+        testCompile 'com.eaglesakura:android-unittest-support:1.+'
+    } else {
+        // private.gradleで EGLIBRARY_COMPILE_LOCAL=true の場合にソースコード単位でフレームワークを取り込む
+
+        /**
+         * 標準フレームワーク
+         */
+        compile project(":eglibrary:simple-logger")
+        compile project(":eglibrary:simple-utils")
+        compile project(':eglibrary:android-thread')
+        compile project(':eglibrary:android-text-kvs')
+        compile project(':eglibrary:android-net')
+        compile project(':eglibrary:android-framework')
+        compile project(':eglibrary:greendao-wrapper')
+
+        /**
+         * Optional
+         */
+//        compile project(':eglibrary:android-command-service')   // Service対応
+//        compile project(':eglibrary:android-bluetooth')         // Bluetooth対応
+//        compile project(":eglibrary:android-gms")               // Google Play Service対応
+//        compile project(":eglibrary:android-firebase")          // Firebase対応
+
+        /**
+         * UnitTest
+         */
+        androidTestCompile project(":eglibrary:android-devicetest-support")
+        testCompile project(":eglibrary:android-unittest-support")
+    }
+
+    /**
+     * RecyclerViewにヘッダを与える
+     * https://github.com/timehop/sticky-headers-recyclerview
+     */
+//    compile 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar'
+
+    /**
+     * Andtoi Things対応の場合
+     */
+//    provided 'com.google.android.things:androidthings:0.1-devpreview'
+
+    /**
+     * Android Canvas Test
+     */
+    testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
+
+    /**
+     * support libs
+     */
+    compile "com.android.support:support-v4:${ANDROID_SUPPORT_LIB_VERSION}"
+    compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_LIB_VERSION}"
+    compile "com.android.support:cardview-v7:${ANDROID_SUPPORT_LIB_VERSION}"
+    compile "com.android.support:recyclerview-v7:${ANDROID_SUPPORT_LIB_VERSION}"
+    compile "com.android.support:palette-v7:${ANDROID_SUPPORT_LIB_VERSION}"
+    compile "com.android.support:design:${ANDROID_SUPPORT_LIB_VERSION}"
+    compile "com.android.support:support-vector-drawable:${ANDROID_SUPPORT_LIB_VERSION}"
+
+    /**
+     * Play Service
+     */
+//    compile "com.google.android.gms:play-services-location:${ANDROID_PLAYSERVICE_LIB_VERSION}"
+//    compile "com.google.android.gms:play-services-maps:${ANDROID_PLAYSERVICE_LIB_VERSION}"
+//    compile "com.google.android.gms:play-services-auth:${ANDROID_PLAYSERVICE_LIB_VERSION}"
+
+    /**
+     * Firebase
+     */
+//    compile "com.google.firebase:firebase-core:${ANDROID_PLAYSERVICE_LIB_VERSION}"
+//    compile "com.google.firebase:firebase-auth:${ANDROID_PLAYSERVICE_LIB_VERSION}"
+//    compile "com.google.firebase:firebase-config:${ANDROID_PLAYSERVICE_LIB_VERSION}"
+//    compile "com.google.firebase:firebase-database:${ANDROID_PLAYSERVICE_LIB_VERSION}"
+//    compile 'com.android.support:support-annotations:+'
+//    // Firebase Crashはリリース時のみで良い
+//    releaseCompile "com.google.firebase:firebase-crash:${ANDROID_PLAYSERVICE_LIB_VERSION}"
+
+    /**
+     * Remote Debug
+     */
+    debugCompile 'com.deploygate:sdk:3.1'
+}
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    defaultConfig {
+        /**
+         * FIXME: ApplicationID(package name)に書き換える
+         */
+        applicationId "replace.your.app_package"
+        minSdkVersion 19
+        targetSdkVersion 25
+
+        versionCode eglibrary.ci.buildVersionCode as int
+        versionName "${APP_VERSION}${getArtifactVersionSuffix()}"
+        vectorDrawables.useSupportLibrary = true        // using vector drawable
+
+        /**
+         * BuildConfig情報を必要に応じて追加する
+         */
+        buildConfigField "String", "BUILD_DATE", "\"${eglibrary.ci.buildDate}\""
+        buildConfigField "String", "BASE_APP_VERSION", "\"${APP_VERSION}\"";
+        buildConfigField "int", "BUILD_NUMBER", "${eglibrary.ci.buildVersionCode as int}";  // ビルド番号
+        buildConfigField "boolean", "BUILD_FROM_CI", "${eglibrary.ci.ciRunning}";  // CIフラグ
+
+        /**
+         * AndroidManifest.xmlの動的書き換えを利用する
+         */
+//        manifestPlaceholders = [
+//                google_api_key: "@string/google_api_key"
+//        ]
+
+        /**
+         * UnitTest
+         */
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs += [
+                    'src/main/gen/java',
+            ]
+        }
+    }
+
+    /**
+     * アプリ署名設定
+     */
+    signingConfigs {
+        debug {
+            storeFile DEBUG_KEYSTORE_FILE_PATH
+            storePassword DEBUG_KEYSTORE_PASS
+            keyAlias DEBUG_KEYSTORE_ALIAS_NAME
+            keyPassword DEBUG_KEYSTORE_ALIAS_PASS
+        }
+
+        release {
+            storeFile RELEASE_KEYSTORE_FILE_PATH
+            storePassword RELEASE_KEYSTORE_PASS
+            keyAlias RELEASE_KEYSTORE_ALIAS_NAME
+            keyPassword RELEASE_KEYSTORE_ALIAS_PASS
+        }
+    }
+
+//    productFlavors {
+//        // 必要に応じて追加する
+//        develop {
+//            minSdkVersion 21
+//        }
+//    }
+
+
+    buildTypes {
+
+        debug {
+            applicationIdSuffix = ".debug"
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dexOptions {
+        // memo: http://developer.covelline.com/2015/06/circle-ci/
+        javaMaxHeapSize eglibrary.ci.ciRunning ? "1g" : "4g"
+        maxProcessCount eglibrary.ci.ciRunning ? 1 : 4
+        threadCount eglibrary.ci.ciRunning ? 1 : 8
+        preDexLibraries !eglibrary.ci.ciRunning
+    }
+
+
+    lintOptions {
+        disable "DuplicateIds"
+        disable "NewApi"
+        disable "InvalidPackage"
+        disable "ProtectedPermissions"
+        disable "ResourceType"
+//        abortOnError false
+    }
+
+    /**
+     * アプリ実行に不要となるファイルのテンプレート
+     */
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude "**/**annotations.gwt.xml"
+        exclude "**/**-setter_store.bin"
+        exclude "**/**-layoutinfo.bin"
+        exclude "**/**-br.bin"
+    }
+    testOptions {
+        unitTests.all {
+            // CIではVM使用量を抑える
+            if (eglibrary.ci.ciRunning) {
+                jvmArgs '-Xmx2048m', '-XX:+HeapDumpOnOutOfMemoryError'
+            }
+        }
+    }
+}
+
+/**
+ * UnitTest & retro lambda
+ */
+tasks.withType(Test) {
+    project.tasks
+            .findAll {
+        task -> (task.name ==~ /compile.*?TestJava.*?/)
+    }
+    .each { task ->
+        task.doFirst {
+            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_1_8
+        }
+    }
+}
+
+/**
+ * バージョンを取得する
+ * CircleCIの場合、バージョン末尾にビルド番号を付与する
+ */
+def getArtifactVersionSuffix() {
+    if (System.env.CIRCLE_BUILD_NUM != null) {
+        // CircleCIのバージョンが指定されているので、そちらを利用する
+        return ".${System.env.CIRCLE_BUILD_NUM}"
+    } else {
+        return ".local"
+    }
+}
+
+apply from: "generator.gradle"
+
+/**
+ * Dexで使用されているメソッド数の統計を取る
+ */
+apply plugin: 'com.getkeepsafe.dexcount'
+dexcount {
+    format = "json"
+    includeClasses = false
+    includeFieldCount = true
+    includeTotalMethodCount = true
+    orderByMethodCount = true
+    verbose = false
+}
+
+/**
+ * FIXME: Google Play Serviceを利用する場合は有効化する
+ */
+//apply plugin: 'com.google.gms.google-services'
