@@ -17,10 +17,11 @@
 
 | 環境変数名 | 内容 | 備考 |
 |---|---|---|
-|$IMGMAGICK_CONVERT | ImageMagick convertコマンドパス | mipmap出力を行う場合 |
-|$$IMGMAGICK_IDENTIFY | ImageMagick identifyコマンドパス | mipmap出力を行う場合 |
+| IMGMAGICK_CONVERT | ImageMagick convertコマンドパス | mipmap出力を行う場合 |
+| IMGMAGICK_IDENTIFY | ImageMagick identifyコマンドパス | mipmap出力を行う場合 |
 | DEPLOYGATE_USER_NAME | CIからDeploygateへDeployする場合のアカウント名 | CIのみ |
 | DEPLOYGATE_API_KEY | CIからDeploygateへDeployする場合のAPIキー | CIのみ |
+| SLACK_HOOK_URL | CIからSlack通知を行う場合のURL | CIのみ |
 
 ## アプリ開発の開始
 
