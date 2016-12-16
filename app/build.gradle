@@ -291,6 +291,22 @@ def getArtifactVersionSuffix() {
 apply from: "generator.gradle"
 
 /**
+ * Slackに通知を行なう
+ */
+apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'com.mindera.gradle.slack'
+apply plugin: 'com.github.ben-manes.versions'
+
+slack {
+    url System.getenv("SLACK_HOOK_URL");
+    dependsOnTasks 'assembleDebug', 'assembleRelease', 'testDebugUnitTest', 'dependencyUpdates';
+    title file("../").name;
+    enabled = eglibrary.ci.ciRunning && (System.getenv("SLACK_HOOK_URL") != null)
+//    enabled = true
+    gitInfo = true
+}
+
+/**
  * Dexで使用されているメソッド数の統計を取る
  */
 apply plugin: 'com.getkeepsafe.dexcount'
