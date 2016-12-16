@@ -34,6 +34,21 @@
 
 サンプルで入っている `ExampleActivity` は参考であるため、削除しても問題ありません。
 
+* 参考手順
+
+```
+# アプリをcloneする
+git clone git@github.com:eaglesakura/android-app-template.git
+
+# ディレクトリ名を任意に変更する
+mv android-app-template/ my-application/
+cd my-application/
+
+# Remote Repositoryを変更する
+git remote rm origin
+git remote add origin git@your-repository.git
+```
+
 ## ビルド方法
 
 コマンドラインで下記のコマンドを実行することで、アプリをビルドすることができます。
