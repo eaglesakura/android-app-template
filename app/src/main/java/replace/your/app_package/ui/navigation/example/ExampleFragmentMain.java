@@ -22,15 +22,22 @@ import replace.your.app_package.util.AppLog;
 @FragmentLayout(R.layout.example_helloworld)
 public class ExampleFragmentMain extends AppNavigationFragment {
 
+    /**
+     * Frameworkにより自動的に依存注入が行われる
+     */
     @Inject(AppContextProvider.class)
     AppSettings mAppSettings;
 
+    /**
+     * Frameworkにより自動的にViewBindが行われる
+     */
     @Bind(R.id.Example_Item_Debuggable)
     SwitchCompat mDebugSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 非同期処理を行なう
         asyncUI(task -> {
             try (ProgressToken token = pushProgress(R.string.EsMaterial_Word_Common_DataLoad)) {
                 // 適当な非同期処理
@@ -49,6 +56,9 @@ public class ExampleFragmentMain extends AppNavigationFragment {
         mDebugSwitch.setChecked(mAppSettings.getDebugSetting().isDebugEnable());
     }
 
+    /**
+     * Frameworkにより自動的にOnCheckedChangeが行われる。
+     */
     @OnCheckedChanged(R.id.Example_Item_Debuggable)
     void changedDebuggable(boolean checked) {
         mAppSettings.getDebugSetting().setDebugEnable(checked);
