@@ -11,6 +11,8 @@ apply plugin: 'me.tatarka.retrolambda' /* Android Lambda */
 configurations {
     all*.exclude group: "com.google.code.findbugs", module: "jsr305"
     all*.exclude group: "org.apache.httpcomponents", module: "httpclient"
+
+
 }
 
 dependencies {
@@ -35,6 +37,8 @@ dependencies {
         /**
          * Optional
          */
+//        compile 'com.eaglesakura:android-egl:1.+'
+//        compile 'com.eaglesakura:android-camera:1.+'
 //        compile 'com.eaglesakura:android-bluetooth:1.+'
 //        compile 'com.eaglesakura:android-command-service:1.+'
 //        compile 'com.eaglesakura:android-gms:1.+'
@@ -62,6 +66,7 @@ dependencies {
         /**
          * Optional
          */
+//        compile project(':eglibrary:android-camera')            // Camera API対応
 //        compile project(':eglibrary:android-command-service')   // Service対応
 //        compile project(':eglibrary:android-bluetooth')         // Bluetooth対応
 //        compile project(":eglibrary:android-gms")               // Google Play Service対応
@@ -81,7 +86,7 @@ dependencies {
 //    compile 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar'
 
     /**
-     * Andtoi Things対応の場合
+     * Android Things対応の場合
      */
 //    provided 'com.google.android.things:androidthings:0.1-devpreview'
 
@@ -91,7 +96,7 @@ dependencies {
     testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
 
     /**
-     * support libs
+     * Android Support Library
      */
     compile "com.android.support:support-v4:${ANDROID_SUPPORT_LIB_VERSION}"
     compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_LIB_VERSION}"
@@ -100,23 +105,45 @@ dependencies {
     compile "com.android.support:palette-v7:${ANDROID_SUPPORT_LIB_VERSION}"
     compile "com.android.support:design:${ANDROID_SUPPORT_LIB_VERSION}"
     compile "com.android.support:support-vector-drawable:${ANDROID_SUPPORT_LIB_VERSION}"
+    compile "com.android.support:support-annotations:${ANDROID_SUPPORT_LIB_VERSION}"
+//    compile "com.android.support:percent:${ANDROID_SUPPORT_LIB_VERSION}"                  // PercentLayout
+//    compile "com.android.support:exifinterface:${ANDROID_SUPPORT_LIB_VERSION}"            // Exif Interface
+//    compile "com.android.support:customtabs:${ANDROID_SUPPORT_LIB_VERSION}"               // Chrome Custom Tabs
 
     /**
      * Play Service
+     * https://developers.google.com/android/guides/overview
+     * https://developers.google.com/android/guides/setup
      */
-//    compile "com.google.android.gms:play-services-location:${ANDROID_PLAYSERVICE_LIB_VERSION}"
-//    compile "com.google.android.gms:play-services-maps:${ANDROID_PLAYSERVICE_LIB_VERSION}"
-//    compile "com.google.android.gms:play-services-auth:${ANDROID_PLAYSERVICE_LIB_VERSION}"
+//    compile "com.google.android.gms:play-services-plus:${ANDROID_PLAYSERVICE_LIB_VERSION}"        // Google+
+//    compile "com.google.android.gms:play-services-auth:${ANDROID_PLAYSERVICE_LIB_VERSION}"        // Google Login
+//    compile "com.google.android.gms:play-services-identity:${ANDROID_PLAYSERVICE_LIB_VERSION}"    // Google Address API
+//    compile "com.google.android.gms:play-services-analytics:${ANDROID_PLAYSERVICE_LIB_VERSION}"   // Google Analytics
+//    compile "com.google.android.gms:play-services-awareness:${ANDROID_PLAYSERVICE_LIB_VERSION}"   // Google Awareness
+//    compile "com.google.android.gms:play-services-cast:${ANDROID_PLAYSERVICE_LIB_VERSION}"        // Google Cast
+//    compile "com.google.android.gms:play-services-gcm:${ANDROID_PLAYSERVICE_LIB_VERSION}"         // Google Cloud Messaging
+//    compile "com.google.android.gms:play-services-drive:${ANDROID_PLAYSERVICE_LIB_VERSION}"       // Google Drive
+//    compile "com.google.android.gms:play-services-fitness:${ANDROID_PLAYSERVICE_LIB_VERSION}"     // Google Fit
+//    compile "com.google.android.gms:play-services-location:${ANDROID_PLAYSERVICE_LIB_VERSION}"    // Google Location and Activity Recognition
+//    compile "com.google.android.gms:play-services-maps:${ANDROID_PLAYSERVICE_LIB_VERSION}"        // Google Maps
+//    compile "com.google.android.gms:play-services-ads:${ANDROID_PLAYSERVICE_LIB_VERSION}"         // Google Mobile Ads
+//    compile "com.google.android.gms:play-services-places:${ANDROID_PLAYSERVICE_LIB_VERSION}"      // Google Places
+//    compile "com.google.android.gms:play-services-vision:${ANDROID_PLAYSERVICE_LIB_VERSION}"      // Mobile Vision
+//    compile "com.google.android.gms:play-services-nearby:${ANDROID_PLAYSERVICE_LIB_VERSION}"      // Google Nearby
+//    compile "com.google.android.gms:play-services-panorama:${ANDROID_PLAYSERVICE_LIB_VERSION}"    // Google Panorama Viewer
+//    compile "com.google.android.gms:play-services-games:${ANDROID_PLAYSERVICE_LIB_VERSION}"       // Google Play Game services
+//    compile "com.google.android.gms:play-services-safetynet:${ANDROID_PLAYSERVICE_LIB_VERSION}"   // SafetyNet
+//    compile "com.google.android.gms:play-services-wallet:${ANDROID_PLAYSERVICE_LIB_VERSION}"      // Android Pay
+//    compile "com.google.android.gms:play-services-wearable:${ANDROID_PLAYSERVICE_LIB_VERSION}"    // Android Wear
 
     /**
      * Firebase
      */
-//    compile "com.google.firebase:firebase-core:${ANDROID_PLAYSERVICE_LIB_VERSION}"
-//    compile "com.google.firebase:firebase-auth:${ANDROID_PLAYSERVICE_LIB_VERSION}"
-//    compile "com.google.firebase:firebase-config:${ANDROID_PLAYSERVICE_LIB_VERSION}"
-//    compile "com.google.firebase:firebase-database:${ANDROID_PLAYSERVICE_LIB_VERSION}"
-//    compile 'com.android.support:support-annotations:+'
-//    // Firebase Crashはリリース時のみで良い
+//    compile "com.google.firebase:firebase-appindexing:${ANDROID_PLAYSERVICE_LIB_VERSION}"         // App Indexing
+//    compile "com.google.firebase:firebase-core:${ANDROID_PLAYSERVICE_LIB_VERSION}"                // Firebase Core
+//    compile "com.google.firebase:firebase-auth:${ANDROID_PLAYSERVICE_LIB_VERSION}"                // Firebase Auth
+//    compile "com.google.firebase:firebase-config:${ANDROID_PLAYSERVICE_LIB_VERSION}"              // Firebase Remote Configs
+//    compile "com.google.firebase:firebase-database:${ANDROID_PLAYSERVICE_LIB_VERSION}"            // Firebase Realtime Database
 //    releaseCompile "com.google.firebase:firebase-crash:${ANDROID_PLAYSERVICE_LIB_VERSION}"
 
     /**
@@ -124,6 +151,7 @@ dependencies {
      */
     debugCompile 'com.deploygate:sdk:3.1'
 }
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -160,9 +188,9 @@ android {
         /**
          * AndroidManifest.xmlの動的書き換えを利用する
          */
-//        manifestPlaceholders = [
-//                google_api_key: "@string/google_api_key"
-//        ]
+        manifestPlaceholders = [
+                google_api_key: "@string/google_api_key"
+        ]
 
         /**
          * UnitTest
