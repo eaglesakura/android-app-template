@@ -39,11 +39,15 @@ props {
 task generateFirebaseConfig(type: com.eaglesakura.gradle.task.FirebaseRemoteConfigGenTask) {
     outDirectory = file("src/main/gen/java")
     def AppStatusConfig = newConfig("${android.defaultConfig.applicationId}.gen.config.AppStatusConfig");
-    AppStatusConfig.stringConfig("database_path_config", "nil");      // Databaseのコンフィグリンク
+    AppStatusConfig.stringConfig("stringConfig", "nil");        // 文字列値
+    AppStatusConfig.doubleConfig("doubleConfig", 0);            // double値
+    AppStatusConfig.longConfig("longConfig", 0);                // long値
+    AppStatusConfig.intConfig("intConfig", 0);                  // int値
+    AppStatusConfig.booleanConfig("booleanConfig", false);      // bool値
 }
 
 /**
- * サイクルコンピューター設定用プロファイルを出力する
+ * greenDAOのData Access Object(HogeDao/DaoMaster)を生成する
  */
 task generateDao(type: com.eaglesakura.gradle.task.AndroidDaoGenTask) {
     outDirectory = file("src/main/gen/java")

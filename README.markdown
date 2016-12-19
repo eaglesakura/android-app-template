@@ -87,6 +87,76 @@ chmod 755 ./gradlew
 ./gradlew --refresh-dependencies assemble
 </pre>
 
+## 導入済みプラグイン
+
+### 設定クラス生成
+
+`generator.gradle` の `androidGenerateProperties` タスクで生成される。
+
+`app/config/app_properties.json` にアプリで保存するKey-Valueリストを記述し、下記のコマンドを実行することで自動的に設定保存クラスを生成できる。
+
+アプリはPreferenceを使うことを推奨しない。これは、複数Processで起動した際にPreferenceのSetが反映されない場合があるため。
+
+生成されたクラスはSQLite+ContentProviderを使用し、データ管理用プロセスが代表してデータを持つようになる。
+ただし、PreferenceFragmentのようなUtilは使えない。
+
+```
+# app/src/main/gen/java 配下に設定クラスが出力される。
+# 設定は generator.gradle に記述されている
+
+./gradlew :app:androidGenerateProperties
+```
+
+### FirebaseRemoteConfigクラス生成
+
+`generator.gradle` の `generateFirebaseConfig` タスクで生成される。
+
+FirebaseRemoteConfigにアクセスするためのUtilクラスを生成する。
+このクラスは直接使わず、Delegateを生成することを推奨する。これはUnitTestにて固定値を返す等の処理がしやすくなるため。
+
+```
+# app/src/main/gen/java 配下に設定クラスが出力される。
+# 設定は generator.gradle に記述されている
+
+./gradlew :app:generateFirebaseConfig
+```
+
+### geenDAO Data Access Object(DAO)生成
+
+`generator.gradle` の `generateDao` タスクで生成される。
+
+greenDAOは性質上、事前にJavaプログラムからDAO生成を必須となる。
+新規にJavaプログラムを書くのは手間なので、生成用のTaskをデフォルトで用意している。
+
+```
+# app/src/main/gen/java 配下に設定クラスが出力される。
+# 設定は generator.gradle に記述されている
+
+./gradlew :app:generateDao
+```
+
+### mipmap用画像ファイル自動生成
+
+`generator.gradle` の `androidBuildMipmap` タスクで生成される。
+
+`app/image/mipmap` 配下のファイルを ImageMagickによって縮小し、所定のディレクトリへ配置する。この時、正規のディレクトリへ画像を出力しないとmipmapリソースとしてAndroid Studioから認識されない場合があることに注意する。
+
+```
+# app/src/main/gen/java 配下に設定クラスが出力される。
+# 設定は generator.gradle に記述されている
+
+./gradlew :app:androidBuildMipmap
+```
+
+### Dexメソッド数カウント
+
+`app/build.gradle`に記述されている。
+
+### Slack通知
+
+`app/build.gradle`に記述されている。`SLACK_HOOK_URL`の環境変数が設定されている場合、ビルド状況をSlackへ通知する。
+
+
 ## ライセンス
 
 MITライセンスで配布します。このコードを一部、もしくは全部を利用した場合はライセンスにしたがって表記を行ってください。
