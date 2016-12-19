@@ -11,8 +11,6 @@ apply plugin: 'me.tatarka.retrolambda' /* Android Lambda */
 configurations {
     all*.exclude group: "com.google.code.findbugs", module: "jsr305"
     all*.exclude group: "org.apache.httpcomponents", module: "httpclient"
-
-
 }
 
 dependencies {
@@ -80,22 +78,6 @@ dependencies {
     }
 
     /**
-     * RecyclerViewにヘッダを与える
-     * https://github.com/timehop/sticky-headers-recyclerview
-     */
-//    compile 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar'
-
-    /**
-     * Android Things対応の場合
-     */
-//    provided 'com.google.android.things:androidthings:0.1-devpreview'
-
-    /**
-     * Android Canvas Test
-     */
-    testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
-
-    /**
      * Android Support Library
      */
     compile "com.android.support:support-v4:${ANDROID_SUPPORT_LIB_VERSION}"
@@ -150,6 +132,18 @@ dependencies {
      * Remote Debug
      */
     debugCompile 'com.deploygate:sdk:3.1'
+
+
+    /**
+     * Android Things対応の場合
+     */
+//    provided 'com.google.android.things:androidthings:0.1-devpreview'
+
+    /**
+     * Android Canvas Test
+     */
+//    testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
+
 }
 
 android {
