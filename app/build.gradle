@@ -187,6 +187,11 @@ android {
         ]
 
         /**
+         * 日本語と英語リソースのみを残す
+         */
+        resConfigs "en", "ja"
+
+        /**
          * UnitTest
          */
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
