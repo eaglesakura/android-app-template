@@ -11,6 +11,7 @@ buildscript {
 
 apply plugin: 'com.eaglesakura.ci-support'
 apply plugin: 'deploygate'
+apply from: "private/private.gradle"
 
 /**
  * フレーバー指定でapkを検索

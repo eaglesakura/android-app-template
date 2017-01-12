@@ -54,5 +54,5 @@ ext.RELEASE_KEYSTORE_ALIAS_PASS = "apprelease"
  * Deploygateユーザー情報をコピーする
  * CIの環境変数にて設定する
  */
-ext.DEPLOYGATE_USER_NAME = "${System.properties["DEPLOYGATE_USER_NAME"]}"
-ext.DEPLOYGATE_API_KEY = "${System.properties["DEPLOYGATE_API_KEY"]}"
+ext.DEPLOYGATE_USER_NAME = "${System.env.DEPLOYGATE_USER_NAME}"
+ext.DEPLOYGATE_API_KEY = "${System.env.DEPLOYGATE_API_KEY}"
