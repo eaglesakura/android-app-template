@@ -38,6 +38,7 @@ public class AppLog {
      */
     public static void report(Throwable e) {
         e.printStackTrace();
+
         try {
             if (FirebaseCrash == null) {
                 FirebaseCrash = Class.forName("com.google.firebase.crash.FirebaseCrash");
