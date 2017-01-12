@@ -23,7 +23,7 @@ dependencies {
         compile 'com.eaglesakura:simple-serialize:1.+'
         compile 'com.eaglesakura:android-simple-utils:1.+'
         compile 'com.eaglesakura:android-thread:1.+'
-        compile 'com.eaglesakura:android-text-kvs:1.+'
+        compile 'com.eaglesakura:android-text-kvs:2.+'
         compile 'com.eaglesakura:android-net:1.+'
         compile 'com.eaglesakura:rxandroid-support:2.+'
         compile 'com.eaglesakura:onactivityresult-invoke:1.+'
