@@ -6,6 +6,7 @@
     <application
             android:allowBackup="false"
             android:label="@string/Env.AppName"
+            android:icon="@mipmap/ic_launcher"
             android:name="replace.your.app_package.CustomApplication"
             android:theme="@style/App.Theme">
 
