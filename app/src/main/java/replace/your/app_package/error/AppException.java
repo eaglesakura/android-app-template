@@ -4,6 +4,7 @@ import com.eaglesakura.android.rx.error.TaskCanceledException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 
 import replace.your.app_package.error.io.AppDataNotFoundException;
 import replace.your.app_package.error.io.AppIOException;
@@ -61,6 +62,8 @@ public class AppException extends Exception {
 
         if (e instanceof TaskCanceledException) {
             throw (TaskCanceledException) e;
+        } else if (e instanceof InterruptedIOException) {
+            throw new TaskCanceledException(e);
         } else {
             throwAppException(e);
         }

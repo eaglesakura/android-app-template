@@ -28,6 +28,9 @@ if ("true" == "${System.properties["app.lib_no_compile"]}") {
  * デバッグ用署名設定
  *
  * アプリごとに正しい署名鍵に書き換えなければならない。
+ *
+ * SHA1取得
+ * keytool -list -v -keystore ./app/sign/appdebug.jks -alias appdebug
  */
 ext.DEBUG_KEYSTORE_FILE_PATH = file('app/sign/appdebug.jks')
 ext.DEBUG_KEYSTORE_PASS = "appdebug"
@@ -38,6 +41,9 @@ ext.DEBUG_KEYSTORE_ALIAS_PASS = "appdebug"
  * リリース用署名設定
  *
  * アプリごとに正しい署名鍵に書き換えなければならない。
+ *
+ * SHA1取得
+ * keytool -list -v -keystore ./app/sign/apprelease.jks -alias apprelease
  */
 ext.RELEASE_KEYSTORE_FILE_PATH = file('app/sign/apprelease.jks')
 ext.RELEASE_KEYSTORE_PASS = "apprelease"
@@ -48,5 +54,5 @@ ext.RELEASE_KEYSTORE_ALIAS_PASS = "apprelease"
  * Deploygateユーザー情報をコピーする
  * CIの環境変数にて設定する
  */
-ext.DEPLOYGATE_USER_NAME = "${System.properties["DEPLOYGATE_USER_NAME"]}"
-ext.DEPLOYGATE_API_KEY = "${System.properties["DEPLOYGATE_API_KEY"]}"
+ext.DEPLOYGATE_USER_NAME = "${System.env.DEPLOYGATE_USER_NAME}"
+ext.DEPLOYGATE_API_KEY = "${System.env.DEPLOYGATE_API_KEY}"
