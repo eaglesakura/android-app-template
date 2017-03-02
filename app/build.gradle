@@ -21,32 +21,104 @@ dependencies {
         compile 'com.eaglesakura:simple-logger:1.+'
         compile 'com.eaglesakura:simple-utils:1.+'
         compile 'com.eaglesakura:simple-serialize:1.+'
-        compile 'com.eaglesakura:android-simple-utils:1.+'
-        compile 'com.eaglesakura:android-thread:1.+'
-        compile 'com.eaglesakura:android-text-kvs:2.+'
-        compile 'com.eaglesakura:android-net:1.+'
-        compile 'com.eaglesakura:rxandroid-support:2.+'
-        compile 'com.eaglesakura:onactivityresult-invoke:1.+'
-        compile 'com.eaglesakura:greendao-wrapper:2.+'
-        compile 'com.eaglesakura:small-aquery:+'
-        compile 'com.eaglesakura:margarineknife:1.+'
-        compile 'com.eaglesakura:android-framework:2.+'
+        compile('com.eaglesakura:android-simple-utils:1.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
+        compile('com.eaglesakura:android-thread:1.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
+        compile('com.eaglesakura:android-text-kvs:2.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
+        compile('com.eaglesakura:android-net:1.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
+        compile('com.eaglesakura:rxandroid-support:2.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
+        compile('com.eaglesakura:onactivityresult-invoke:1.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
+        compile('com.eaglesakura:small-aquery:+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
+        compile('com.eaglesakura:greendao-wrapper:2.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
+        compile('com.eaglesakura:margarineknife:1.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
+        compile('com.eaglesakura:android-framework:2.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
 
         /**
          * Optional
          */
-//        compile 'com.eaglesakura:android-egl:1.+'
-//        compile 'com.eaglesakura:android-camera:1.+'
-//        compile 'com.eaglesakura:android-bluetooth:1.+'
-//        compile 'com.eaglesakura:android-command-service:1.+'
-//        compile 'com.eaglesakura:android-gms:1.+'
-//        compile 'com.eaglesakura:android-firebase:1.+'
+//        compile('com.eaglesakura:android-egl:1.+') {
+//            exclude(group: "com.android.support")
+//            exclude(group: "com.google.android.gms")
+//            exclude(group: "com.google.firebase")
+//        }
+//        compile('com.eaglesakura:android-camera:1.+') {
+//            exclude(group: "com.android.support")
+//            exclude(group: "com.google.android.gms")
+//            exclude(group: "com.google.firebase")
+//        }
+//        compile('com.eaglesakura:android-bluetooth:1.+') {
+//            exclude(group: "com.android.support")
+//            exclude(group: "com.google.android.gms")
+//            exclude(group: "com.google.firebase")
+//        }
+//        compile('com.eaglesakura:android-command-service:1.+') {
+//            exclude(group: "com.android.support")
+//            exclude(group: "com.google.android.gms")
+//            exclude(group: "com.google.firebase")
+//        }
+//        compile('com.eaglesakura:android-gms:1.+') {
+//            exclude(group: "com.android.support")
+//            exclude(group: "com.google.android.gms")
+//            exclude(group: "com.google.firebase")
+//        }
+//        compile('com.eaglesakura:android-firebase:1.+') {
+//            exclude(group: "com.android.support")
+//            exclude(group: "com.google.android.gms")
+//            exclude(group: "com.google.firebase")
+//        }
 
         /**
          * UnitTest
          */
-        androidTestCompile 'com.eaglesakura:android-devicetest-support:2.+'
-        testCompile 'com.eaglesakura:android-unittest-support:1.+'
+        androidTestCompile('com.eaglesakura:android-devicetest-support:2.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
+        testCompile('com.eaglesakura:android-unittest-support:1.+') {
+            exclude(group: "com.android.support")
+            exclude(group: "com.google.android.gms")
+            exclude(group: "com.google.firebase")
+        }
     } else {
         // private.gradleで EGLIBRARY_COMPILE_LOCAL=true の場合にソースコード単位でフレームワークを取り込む
 
@@ -132,7 +204,6 @@ dependencies {
      * Remote Debug
      */
     debugCompile 'com.deploygate:sdk:3.1.1'
-
 
     /**
      * Android Things対応の場合
