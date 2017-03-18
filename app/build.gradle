@@ -392,7 +392,6 @@ apply from: "generator.gradle"
 /**
  * Slackに通知を行なう
  */
-apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'com.mindera.gradle.slack'
 apply plugin: 'com.github.ben-manes.versions'
 
@@ -405,18 +404,18 @@ slack {
     gitInfo = true
 }
 
-/**
- * Dexで使用されているメソッド数の統計を取る
- */
-apply plugin: 'com.getkeepsafe.dexcount'
-dexcount {
-    format = "json"
-    includeClasses = false
-    includeFieldCount = true
-    includeTotalMethodCount = true
-    orderByMethodCount = true
-    verbose = false
-}
+///**
+// * Dexで使用されているメソッド数の統計を取る
+// */
+//apply plugin: 'com.getkeepsafe.dexcount'
+//dexcount {
+//    format = "json"
+//    includeClasses = false
+//    includeFieldCount = true
+//    includeTotalMethodCount = true
+//    orderByMethodCount = true
+//    verbose = false
+//}
 
 /**
  * FIXME: Google Play Serviceを利用する場合は有効化する

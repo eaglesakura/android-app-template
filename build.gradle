@@ -9,7 +9,7 @@ buildscript {
 
     dependencies {
         // Build Plugins
-        classpath 'com.android.tools.build:gradle:2.2.3'    // Android Studioバージョンにリンクする
+        classpath 'com.android.tools.build:gradle:2.3.0'    // Android Studioバージョンにリンクする
         classpath 'me.tatarka:gradle-retrolambda:3.5.0'
         classpath 'com.google.gms:google-services:3.0.0'
         classpath "com.eaglesakura:plugin-ci-support:1.1.196"
