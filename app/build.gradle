@@ -14,53 +14,6 @@ configurations {
 }
 
 dependencies {
-    if (!EGLIBRARY_COMPILE_LOCAL) {
-        /**
-         * 標準フレームワーク
-         */
-        compile "com.eaglesakura:greendao-wrapper:2.0.457"
-        compile "com.eaglesakura:android-framework:2.25.5.734"
-
-        /**
-         * Optional
-         */
-//        compile "com.eaglesakura:android-canvas-graphics:1.0.433"
-//        compile "com.eaglesakura:geo-utils:1.0.420"
-//        compile "com.eaglesakura:android-egl:1.0.450"
-//        compile "com.eaglesakura:android-camera:1.0.143"
-//        compile "com.eaglesakura:android-bluetooth:1.0.448"
-//        compile "com.eaglesakura:android-gms:1.10.0.103"
-//        compile "com.eaglesakura:android-firebase:1.10.0.128"
-
-        /**
-         * UnitTest
-         */
-        androidTestCompile "com.eaglesakura:android-devicetest-support:2.0.267"
-        testCompile "com.eaglesakura:android-unittest-support:1.3.205"
-    } else {
-        // private.gradleで EGLIBRARY_COMPILE_LOCAL=true の場合にソースコード単位でフレームワークを取り込む
-
-        /**
-         * 標準フレームワーク
-         */
-        compile project(":eglibrary:android-framework")
-        compile project(":eglibrary:greendao-wrapper")
-
-        /**
-         * Optional
-         */
-//        compile project(':eglibrary:android-camera')            // Camera API対応
-//        compile project(':eglibrary:android-bluetooth')         // Bluetooth対応
-//        compile project(":eglibrary:android-gms")               // Google Play Service対応
-//        compile project(":eglibrary:android-firebase")          // Firebase対応
-
-        /**
-         * UnitTest
-         */
-        androidTestCompile project(":eglibrary:android-devicetest-support")
-        testCompile project(":eglibrary:android-unittest-support")
-    }
-
     /**
      * Android Support Library
      */
@@ -127,7 +80,56 @@ dependencies {
      */
 //    testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
 
+    if (!EGLIBRARY_COMPILE_LOCAL) {
+        /**
+         * 標準フレームワーク
+         */
+        compile "com.eaglesakura:greendao-wrapper:2.0.457"
+        compile "com.eaglesakura:android-framework:2.25.5.734"
+
+        /**
+         * Optional
+         */
+//    compile "com.eaglesakura:android-canvas-graphics:1.0.433"
+//    compile "com.eaglesakura:geo-utils:1.0.420"
+//    compile "com.eaglesakura:android-egl:1.0.450"
+//    compile "com.eaglesakura:android-camera:1.0.143"
+//    compile "com.eaglesakura:android-bluetooth:1.0.448"
+//    compile "com.eaglesakura:android-gms:1.10.0.103"
+//    compile "com.eaglesakura:android-firebase:1.10.0.128"
+
+        /**
+         * UnitTest
+         */
+        androidTestCompile("com.eaglesakura:android-devicetest-support:2.0.267") {
+            exclude(group: "com.android.support")
+        }
+        testCompile "com.eaglesakura:android-unittest-support:1.3.205"
+    } else {
+        // private.gradleで EGLIBRARY_COMPILE_LOCAL=true の場合にソースコード単位でフレームワークを取り込む
+
+        /**
+         * 標準フレームワーク
+         */
+        compile project(":eglibrary:android-framework")
+        compile project(":eglibrary:greendao-wrapper")
+
+        /**
+         * Optional
+         */
+        compile project(':eglibrary:android-camera')            // Camera API対応
+        compile project(':eglibrary:android-bluetooth')         // Bluetooth対応
+        compile project(":eglibrary:android-gms")               // Google Play Service対応
+        compile project(":eglibrary:android-firebase")          // Firebase対応
+
+        /**
+         * UnitTest
+         */
+        androidTestCompile project(":eglibrary:android-devicetest-support")
+        testCompile project(":eglibrary:android-unittest-support")
+    }
 }
+
 
 android {
     compileSdkVersion 25
@@ -318,6 +320,7 @@ slack {
 
 ///**
 // * Dexで使用されているメソッド数の統計を取る
+// * dexcountはGradle 3.3に非対応のため、一旦削除する
 // */
 //apply plugin: 'com.getkeepsafe.dexcount'
 //dexcount {
