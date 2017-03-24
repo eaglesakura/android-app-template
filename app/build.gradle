@@ -318,19 +318,19 @@ slack {
     gitInfo = true
 }
 
-///**
-// * Dexで使用されているメソッド数の統計を取る
-// * dexcountはGradle 3.3に非対応のため、一旦削除する
-// */
-//apply plugin: 'com.getkeepsafe.dexcount'
-//dexcount {
-//    format = "json"
-//    includeClasses = false
-//    includeFieldCount = true
-//    includeTotalMethodCount = true
-//    orderByMethodCount = true
-//    verbose = false
-//}
+/**
+ * Dexで使用されているメソッド数の統計を取る
+ * dexcountはGradle 3.3に非対応のため、一旦削除する
+ */
+apply plugin: 'com.getkeepsafe.dexcount'
+dexcount {
+    format = "json"
+    includeClasses = false
+    includeFieldCount = true
+    includeTotalMethodCount = true
+    orderByMethodCount = true
+    verbose = false
+}
 
 /**
  * FIXME: Google Play Serviceを利用する場合は有効化する
