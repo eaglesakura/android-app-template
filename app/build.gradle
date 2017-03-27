@@ -117,10 +117,10 @@ dependencies {
         /**
          * Optional
          */
-        compile project(':eglibrary:android-camera')            // Camera API対応
-        compile project(':eglibrary:android-bluetooth')         // Bluetooth対応
-        compile project(":eglibrary:android-gms")               // Google Play Service対応
-        compile project(":eglibrary:android-firebase")          // Firebase対応
+//        compile project(':eglibrary:android-camera')            // Camera API対応
+//        compile project(':eglibrary:android-bluetooth')         // Bluetooth対応
+//        compile project(":eglibrary:android-gms")               // Google Play Service対応
+//        compile project(":eglibrary:android-firebase")          // Firebase対応
 
         /**
          * UnitTest

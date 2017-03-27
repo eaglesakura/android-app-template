@@ -1,30 +1,4 @@
 /**
- * ライブラリをソースコード単位でビルドする場合はtrueを指定する。
- * 下記のコマンドを実行し、ライブラリがリンクしているsubmoduleを全て同期しなければならない。
- */
-ext.EGLIBRARY_COMPILE_LOCAL = false
-
-/**
- * 個別のON/OFF対応
- */
-ext.EGLIBRARY_COMPILE_PROJECT_JAVA_GEO = false           // GEOHASH等を利用する
-ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_BLUETOOTH = false  // Bluetoothを利用する
-ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_EGL = false        // OpenGLを利用する
-ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_CANVAS = false      // Canvasでの自力レンダリングを利用する
-ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_CAMERA = false      // カメラ関連のUtilを利用する
-ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_FRAMEWORK = true   // アプリフレームワークを使用する
-ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_FRAMEWORK_PLAYSERVICE = true
-ext.EGLIBRARY_COMPILE_PROJECT_PLUGINS = false            // プラグインプロジェクトを使用する
-
-// 強制的にコンパイル済Jarを使用する
-if ("true" == "${System.properties["app.lib_no_compile"]}") {
-    println("Libs, Using maven repository")
-    ext.EGLIBRARY_COMPILE_LOCAL = false;
-} else {
-    println("Libs, Using local projects, using maven -> `-Dapp.lib_no_compile=true`")
-}
-
-/**
  * デバッグ用署名設定
  *
  * アプリごとに正しい署名鍵に書き換えなければならない。
@@ -56,3 +30,30 @@ ext.RELEASE_KEYSTORE_ALIAS_PASS = "apprelease"
  */
 ext.DEPLOYGATE_USER_NAME = "${System.env.DEPLOYGATE_USER_NAME}"
 ext.DEPLOYGATE_API_KEY = "${System.env.DEPLOYGATE_API_KEY}"
+
+
+/**
+ * ライブラリをソースコード単位でビルドする場合はtrueを指定する。
+ * 下記のコマンドを実行し、ライブラリがリンクしているsubmoduleを全て同期しなければならない。
+ */
+ext.EGLIBRARY_COMPILE_LOCAL = false
+
+/**
+ * 個別のON/OFF対応
+ */
+ext.EGLIBRARY_COMPILE_PROJECT_JAVA_GEO = false           // GEOHASH等を利用する
+ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_BLUETOOTH = false  // Bluetoothを利用する
+ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_EGL = false        // OpenGLを利用する
+ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_CANVAS = false      // Canvasでの自力レンダリングを利用する
+ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_CAMERA = false      // カメラ関連のUtilを利用する
+ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_FRAMEWORK = true   // アプリフレームワークを使用する
+ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_FRAMEWORK_PLAYSERVICE = true
+
+// 強制的にコンパイル済Jarを使用する
+if ("true" == "${System.properties["app.lib_no_compile"]}") {
+    println("Libs, Using maven repository")
+    ext.EGLIBRARY_COMPILE_LOCAL = false;
+} else {
+    println("Libs, Using local projects, using maven -> `-Dapp.lib_no_compile=true`")
+}
+
