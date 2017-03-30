@@ -1,8 +1,8 @@
 package replace.your.app_package.ui.navigation.base;
 
-import com.eaglesakura.android.framework.delegate.fragment.SupportFragmentDelegate;
-import com.eaglesakura.android.framework.ui.progress.ProgressToken;
-import com.eaglesakura.android.framework.ui.support.SupportFragment;
+import com.eaglesakura.sloth.delegate.fragment.SupportFragmentDelegate;
+import com.eaglesakura.sloth.ui.progress.ProgressToken;
+import com.eaglesakura.sloth.ui.support.SupportFragment;
 import com.eaglesakura.material.widget.support.SupportProgressFragment;
 
 import android.support.annotation.NonNull;

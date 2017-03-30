@@ -1,7 +1,7 @@
 package replace.your.app_package.ui.navigation.base;
 
-import com.eaglesakura.android.framework.delegate.activity.ContentHolderActivityDelegate;
-import com.eaglesakura.android.framework.ui.support.ContentHolderActivity;
+import com.eaglesakura.sloth.delegate.activity.ContentHolderActivityDelegate;
+import com.eaglesakura.sloth.ui.support.ContentHolderActivity;
 import com.eaglesakura.util.Util;
 
 import android.os.Bundle;

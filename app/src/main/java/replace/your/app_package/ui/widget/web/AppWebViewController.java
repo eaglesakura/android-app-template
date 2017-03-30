@@ -1,8 +1,8 @@
 package replace.your.app_package.ui.widget.web;
 
-import com.eaglesakura.android.framework.delegate.lifecycle.LifecycleDelegate;
-import com.eaglesakura.android.framework.ui.support.SupportFragment;
-import com.eaglesakura.android.framework.util.FragmentUtil;
+import com.eaglesakura.sloth.delegate.lifecycle.LifecycleDelegate;
+import com.eaglesakura.sloth.ui.support.SupportFragment;
+import com.eaglesakura.sloth.util.FragmentUtil;
 import com.eaglesakura.material.widget.support.web.SupportWebViewController;
 
 import android.support.v4.app.FragmentManager;

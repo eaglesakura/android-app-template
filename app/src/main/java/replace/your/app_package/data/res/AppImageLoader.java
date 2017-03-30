@@ -1,6 +1,6 @@
 package replace.your.app_package.data.res;
 
-import com.eaglesakura.android.framework.ui.support.SupportFragment;
+import com.eaglesakura.sloth.ui.support.SupportFragment;
 import com.eaglesakura.android.graphics.CachedImageLoader;
 import com.eaglesakura.alternet.Alternet;
 import com.eaglesakura.alternet.request.ConnectRequest;

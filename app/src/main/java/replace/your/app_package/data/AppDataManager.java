@@ -1,5 +1,6 @@
 package replace.your.app_package.data;
 
+import com.eaglesakura.android.db.DaoDatabase;
 import com.eaglesakura.android.garnet.Garnet;
 import com.eaglesakura.android.garnet.Initializer;
 import com.eaglesakura.android.garnet.Inject;
@@ -48,13 +49,13 @@ public abstract class AppDataManager {
      * 読み込み専用モードで開く
      */
     protected AppDatabase openRead() {
-        return mReadDatabase.openReadOnly(AppDatabase.class);
+        return mReadDatabase.open(DaoDatabase.FLAG_READ_ONLY);
     }
 
     /**
      * 書込み可能モードで開く
      */
     protected AppDatabase openWrite() {
-        return mWriteDatabase.openWritable(AppDatabase.class);
+        return mReadDatabase.open(0x00);
     }
 }

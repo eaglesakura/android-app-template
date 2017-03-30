@@ -1,6 +1,6 @@
 package replace.your.app_package.provider;
 
-import com.eaglesakura.android.framework.provider.ContextProvider;
+import com.eaglesakura.sloth.provider.ContextProvider;
 import com.eaglesakura.android.garnet.Provide;
 import com.eaglesakura.android.garnet.Singleton;
 

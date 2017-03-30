@@ -1,6 +1,6 @@
 package replace.your.app_package.ui.navigation;
 
-import com.eaglesakura.android.framework.delegate.activity.ContentHolderActivityDelegate;
+import com.eaglesakura.sloth.delegate.activity.ContentHolderActivityDelegate;
 import com.eaglesakura.material.widget.support.SupportProgressFragment;
 
 import android.os.Bundle;

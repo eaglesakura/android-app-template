@@ -32,7 +32,7 @@ dependencies {
     /**
      * Play Service
      * https://developers.google.com/android/guides/overview
-     * https://developers.google.com/android/guides/setup
+     * https://developers.google.com/android/guides/init
      */
 //    compile "com.google.android.gms:play-services-plus:10.2.0"        // Google+
 //    compile "com.google.android.gms:play-services-auth:10.2.0"        // Google Login

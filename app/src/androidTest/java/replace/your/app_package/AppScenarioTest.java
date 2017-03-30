@@ -1,6 +1,6 @@
 package replace.your.app_package;
 
-import com.eaglesakura.android.framework.ui.support.SupportActivity;
+import com.eaglesakura.sloth.ui.support.SupportActivity;
 import com.eaglesakura.util.Util;
 
 import org.junit.Rule;
