@@ -42,6 +42,7 @@ ext.EGLIBRARY_COMPILE_LOCAL = false
  * 個別のON/OFF対応
  */
 ext.EGLIBRARY_COMPILE_PROJECT_JAVA_GEO = false           // GEOHASH等を利用する
+ext.EGLIBRARY_COMPILE_PROJECT_JAVA_PUBLD = false           // publd-serializerを利用する
 ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_BLUETOOTH = false  // Bluetoothを利用する
 ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_EGL = false        // OpenGLを利用する
 ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_CANVAS = false      // Canvasでの自力レンダリングを利用する

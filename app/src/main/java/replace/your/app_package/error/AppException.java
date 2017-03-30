@@ -1,6 +1,6 @@
 package replace.your.app_package.error;
 
-import com.eaglesakura.android.rx.error.TaskCanceledException;
+import com.eaglesakura.cerberus.error.TaskCanceledException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

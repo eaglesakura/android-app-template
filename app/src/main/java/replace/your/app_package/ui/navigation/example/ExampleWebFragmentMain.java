@@ -3,7 +3,7 @@ package replace.your.app_package.ui.navigation.example;
 import com.eaglesakura.android.framework.ui.support.SupportViewAnimationBuilder;
 import com.eaglesakura.android.framework.ui.support.annotation.FragmentLayout;
 import com.eaglesakura.android.margarine.Bind;
-import com.eaglesakura.android.thread.ui.UIHandler;
+import com.eaglesakura.android.thread.UIHandler;
 import com.eaglesakura.material.widget.SupportWebView;
 import com.eaglesakura.material.widget.support.web.SupportWebViewController;
 
