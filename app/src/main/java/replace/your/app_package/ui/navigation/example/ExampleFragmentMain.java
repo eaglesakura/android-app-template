@@ -1,14 +1,17 @@
 package replace.your.app_package.ui.navigation.example;
 
-import com.eaglesakura.sloth.delegate.fragment.SupportFragmentDelegate;
-import com.eaglesakura.sloth.ui.progress.ProgressToken;
-import com.eaglesakura.sloth.ui.support.annotation.FragmentLayout;
 import com.eaglesakura.android.garnet.Inject;
 import com.eaglesakura.android.margarine.Bind;
 import com.eaglesakura.android.margarine.OnCheckedChanged;
+import com.eaglesakura.sloth.ui.progress.ProgressToken;
+import com.eaglesakura.sloth.annotation.FragmentLayout;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.SwitchCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import replace.your.app_package.R;
 import replace.your.app_package.data.setting.AppSettings;
@@ -38,7 +41,7 @@ public class ExampleFragmentMain extends AppNavigationFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 非同期処理を行なう
-        asyncUI(task -> {
+        asyncQueue(task -> {
             try (ProgressToken token = pushProgress(R.string.EsMaterial_Word_Common_DataLoad)) {
                 // 適当な非同期処理
                 // ダミーで5秒間スリープ
@@ -50,10 +53,12 @@ public class ExampleFragmentMain extends AppNavigationFragment {
         }).start();
     }
 
+    @Nullable
     @Override
-    public void onAfterViews(SupportFragmentDelegate self, int flags) {
-        super.onAfterViews(self, flags);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
         mDebugSwitch.setChecked(mAppSettings.getDebugSetting().isDebugEnable());
+        return view;
     }
 
     /**

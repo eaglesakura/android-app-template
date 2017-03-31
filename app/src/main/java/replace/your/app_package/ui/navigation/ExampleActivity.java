@@ -1,7 +1,7 @@
 package replace.your.app_package.ui.navigation;
 
-import com.eaglesakura.sloth.delegate.activity.ContentHolderActivityDelegate;
-import com.eaglesakura.material.widget.support.SupportProgressFragment;
+import com.eaglesakura.sloth.ui.progress.SupportProgressFragment;
+import com.eaglesakura.sloth.app.delegate.ContentHolderActivityDelegate;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,9 +23,14 @@ public class ExampleActivity extends AppNavigationActivity {
         }
     }
 
+    @Override
+    public int getContentLayout(@NonNull ContentHolderActivityDelegate self) {
+        return R.layout.system_activity_with_toolbar;
+    }
+
     @NonNull
     @Override
-    public Fragment newDefaultContentFragment(@NonNull ContentHolderActivityDelegate self) {
+    public Fragment newContentFragment(@NonNull ContentHolderActivityDelegate self) {
         return new ExampleFragmentMain();
     }
 }

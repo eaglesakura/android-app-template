@@ -1,10 +1,9 @@
 package replace.your.app_package.data.res;
 
-import com.eaglesakura.sloth.ui.support.SupportFragment;
-import com.eaglesakura.android.graphics.CachedImageLoader;
 import com.eaglesakura.alternet.Alternet;
 import com.eaglesakura.alternet.request.ConnectRequest;
 import com.eaglesakura.alternet.request.SimpleHttpRequest;
+import com.eaglesakura.sloth.graphics.SyncImageLoader;
 import com.eaglesakura.util.Timer;
 
 import android.content.Context;
@@ -15,7 +14,7 @@ import android.support.annotation.NonNull;
 /**
  * アプリ用ImageLoader
  */
-public class AppImageLoader extends CachedImageLoader {
+public class AppImageLoader extends SyncImageLoader {
 
     final private Alternet mNetworkConnector;
 
@@ -45,9 +44,5 @@ public class AppImageLoader extends CachedImageLoader {
     public interface Holder {
         @NonNull
         AppImageLoader getImageLoader();
-    }
-
-    public static AppImageLoader from(SupportFragment fragment) {
-        return fragment.findInterfaceOrThrow(AppImageLoader.Holder.class).getImageLoader();
     }
 }
