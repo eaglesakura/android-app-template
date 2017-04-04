@@ -100,9 +100,15 @@ dependencies {
          * UnitTest
          */
         androidTestCompile("com.eaglesakura:android-devicetest-support:2.1.272") {
+            exclude(group: "com.eaglesakura", module: "java-commons")
+            exclude(group: "com.eaglesakura", module: "android-commons")
             exclude(group: "com.android.support")
         }
-        testCompile "com.eaglesakura:android-unittest-support:1.4.207"
+        testCompile("com.eaglesakura:android-unittest-support:1.4.207") {
+            exclude(group: "com.eaglesakura", module: "java-commons")
+            exclude(group: "com.eaglesakura", module: "android-commons")
+            exclude(group: "com.android.support")
+        }
     } else {
         // private.gradleで EGLIBRARY_COMPILE_LOCAL=true の場合にソースコード単位でフレームワークを取り込む
 
