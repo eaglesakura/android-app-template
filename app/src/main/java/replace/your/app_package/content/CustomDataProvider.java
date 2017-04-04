@@ -1,7 +1,7 @@
 package replace.your.app_package.content;
 
-import com.eaglesakura.sloth.database.ApplicationDataProvider;
-import com.eaglesakura.sloth.database.property.PropertyProviderHandler;
+import com.eaglesakura.sloth.db.ApplicationDataProvider;
+import com.eaglesakura.sloth.db.property.PropertyProviderHandler;
 
 import android.content.Context;
 import android.net.Uri;

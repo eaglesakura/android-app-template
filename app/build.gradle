@@ -85,7 +85,7 @@ dependencies {
          * 標準フレームワーク
          */
         compile "com.eaglesakura:greendao-wrapper:2.0.457"
-        compile "com.eaglesakura:android-framework:2.25.5.734"
+        compile "com.eaglesakura:sloth-framework:3.25.0.6"
 
         /**
          * Optional

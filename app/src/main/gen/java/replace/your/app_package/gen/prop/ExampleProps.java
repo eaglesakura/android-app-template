@@ -1,7 +1,7 @@
 package replace.your.app_package.gen.prop;
 
 
-public class ExampleProps extends com.eaglesakura.android.property.internal.GeneratedProperties {
+public class ExampleProps extends com.eaglesakura.sloth.db.property.internal.GeneratedProperties {
     
     public static final String ID_BOOLVALUE = "ExampleProps.boolValue";
     public static final String ID_INTVALUE = "ExampleProps.intValue";
@@ -12,7 +12,7 @@ public class ExampleProps extends com.eaglesakura.android.property.internal.Gene
     public static final String ID_BYTEARRAYVALUE = "ExampleProps.byteArrayValue";
     
     public ExampleProps(){ }
-    public ExampleProps(com.eaglesakura.android.property.PropertyStore store) { setPropertyStore(store); }
+    public ExampleProps(com.eaglesakura.sloth.db.property.PropertyStore store){ setPropertyStore(store); }
     public void setBoolValue(boolean set){ setProperty("ExampleProps.boolValue", set); }
     public boolean isBoolValue(){ return getBooleanProperty("ExampleProps.boolValue"); }
     public void setIntValue(int set){ setProperty("ExampleProps.intValue", set); }

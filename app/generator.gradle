@@ -1,15 +1,14 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url "http://eaglesakura.github.io/maven/" }
+        maven { url "https://dl.bintray.com/eaglesakura/maven/" }
     }
     dependencies {
-        classpath "com.eaglesakura:plugin-android-dbgenerator:2.0.146"
-        classpath "com.eaglesakura:plugin-firebase-remoteconfig:1.0.36"
+        classpath "com.eaglesakura:sloth-plugin:1.0.9"
     }
 }
-apply plugin: 'com.eaglesakura.android-mipmap'
-apply plugin: 'com.eaglesakura.android-props'
+apply plugin: 'com.eaglesakura.android-mipmap' /* Generate Android Mipmap */
+apply plugin: 'com.eaglesakura.sloth.prop' /* Generate App Properties */
 
 /**
  * mipmap生成管理
@@ -30,13 +29,14 @@ mipmap {
  * アプリのプロパティ管理
  */
 props {
-    property file("config/app_properties.json")
+    output file("src/main/gen/java")
+    property file("config/app_properties.json"), "replace.your.app_package.gen.prop"
 }
 
 /**
  * Firebaseで管理されるConfigを生成する
  */
-task generateFirebaseConfig(type: com.eaglesakura.gradle.task.FirebaseRemoteConfigGenTask) {
+task generateFirebaseConfig(type: com.eaglesakura.sloth.firebase.FirebaseRemoteConfigGenTask) {
     outDirectory = file("src/main/gen/java")
     def AppStatusConfig = newConfig("${android.defaultConfig.applicationId}.gen.config.AppStatusConfig");
     AppStatusConfig.stringConfig("stringConfig", "nil");        // 文字列値
@@ -49,7 +49,7 @@ task generateFirebaseConfig(type: com.eaglesakura.gradle.task.FirebaseRemoteConf
 /**
  * greenDAOのData Access Object(HogeDao/DaoMaster)を生成する
  */
-task generateDao(type: com.eaglesakura.gradle.task.AndroidDaoGenTask) {
+task generateDao(type: com.eaglesakura.sloth.dao.AndroidDaoGenTask) {
     outDirectory = file("src/main/gen/java")
     classPackageBase = "${android.defaultConfig.applicationId}.gen.dao"
 
