@@ -1,11 +1,11 @@
 buildscript {
     repositories {
-        maven { url "http://eaglesakura.github.io/maven/" }
         jcenter()
+        maven { url "https://dl.bintray.com/eaglesakura/maven/" }
     }
 
     dependencies {
-        classpath "com.eaglesakura:plugin-ci-support:1.1.196"
+        classpath "com.eaglesakura:plugin-ci-support:1.2.200"
     }
 }
 

@@ -1,6 +1,6 @@
 package replace.your.app_package.ui.widget;
 
-import com.eaglesakura.material.widget.DialogBuilder;
+import com.eaglesakura.sloth.view.builder.DialogBuilder;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;

@@ -1,11 +1,11 @@
 package replace.your.app_package.data.setting;
 
-import com.eaglesakura.android.framework.content.property.ProviderPropertyStore;
+import com.eaglesakura.sloth.db.property.PropertyStore;
+import com.eaglesakura.sloth.db.property.ProviderPropertyStore;
 import com.eaglesakura.android.garnet.Singleton;
-import com.eaglesakura.android.property.PropertyStore;
-import com.eaglesakura.android.property.TextDatabasePropertyStore;
-import com.eaglesakura.android.property.model.PropertySource;
 import com.eaglesakura.json.JSON;
+import com.eaglesakura.sloth.db.property.TextDatabasePropertyStore;
+import com.eaglesakura.sloth.db.property.model.PropertySource;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -19,7 +19,7 @@ import replace.your.app_package.provider.AppStorageProvider;
 /**
  * アプリデータ用DB
  */
-public class AppDatabase extends DaoDatabase<DaoSession> {
+public class AppDatabase extends DaoDatabase<DaoSession, AppDatabase> {
 
     static final int SUPPORTED_DATABASE_VERSION = 1;
 

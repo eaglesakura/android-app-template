@@ -2,9 +2,11 @@ package replace.your.app_package.util;
 
 import com.eaglesakura.android.garnet.Garnet;
 import com.eaglesakura.android.garnet.Inject;
-import com.eaglesakura.util.LogUtil;
+import com.eaglesakura.log.Logger;
+import com.eaglesakura.util.StringUtil;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.lang.reflect.Method;
 
@@ -16,12 +18,13 @@ import replace.your.app_package.provider.LoggerProvider;
  * FIXME: 必要に応じてログを一括ON/OFFできるようにする。
  */
 public class AppLog {
-
-    @Inject(value = LoggerProvider.class, name = LoggerProvider.NAME_DEFAULT)
-    static LogUtil.Logger sDefaultLogger;
-
     @Inject(value = LoggerProvider.class, name = LoggerProvider.NAME_APPLOG)
-    static LogUtil.Logger sAppLogger;
+    static Logger.Impl sAppLogger = new Logger.AndroidLogger(Log.class) {
+        @Override
+        protected int getStackDepth() {
+            return super.getStackDepth() + 1;
+        }
+    };
 
     static Class FirebaseCrash;
 
@@ -57,55 +60,43 @@ public class AppLog {
         Garnet.create(AppLog.class)
                 .depend(Context.class, context)
                 .inject();
-        LogUtil.setLogger(sDefaultLogger);
     }
 
     public static void widget(String fmt, Object... args) {
         String tag = "App.Widget";
 
-        LogUtil.setLogger(tag, sAppLogger);
-        LogUtil.out(tag, fmt, args);
+        sAppLogger.out(Logger.LEVEL_INFO, tag, StringUtil.format(fmt, args));
     }
 
     public static void system(String fmt, Object... args) {
         String tag = "App.System";
 
-        LogUtil.setLogger(tag, sAppLogger);
-        LogUtil.out(tag, fmt, args);
+        sAppLogger.out(Logger.LEVEL_INFO, tag, StringUtil.format(fmt, args));
     }
 
     public static void db(String fmt, Object... args) {
         String tag = "App.DB";
 
-        LogUtil.setLogger(tag, sAppLogger);
-        LogUtil.out(tag, fmt, args);
+        sAppLogger.out(Logger.LEVEL_INFO, tag, StringUtil.format(fmt, args));
     }
 
     public static void gps(String fmt, Object... args) {
         String tag = "App.GPS";
-
-        LogUtil.setLogger(tag, sAppLogger);
-        LogUtil.out(tag, fmt, args);
+        sAppLogger.out(Logger.LEVEL_INFO, tag, StringUtil.format(fmt, args));
     }
 
     public static void broadcast(String fmt, Object... args) {
         String tag = "App.Broadcast";
-
-        LogUtil.setLogger(tag, sAppLogger);
-        LogUtil.out(tag, fmt, args);
+        sAppLogger.out(Logger.LEVEL_INFO, tag, StringUtil.format(fmt, args));
     }
 
     public static void bluetooth(String fmt, Object... args) {
         String tag = "App.Ble";
-
-        LogUtil.setLogger(tag, sAppLogger);
-        LogUtil.out(tag, fmt, args);
+        sAppLogger.out(Logger.LEVEL_INFO, tag, StringUtil.format(fmt, args));
     }
 
     public static void test(String fmt, Object... args) {
         String tag = "App.Test";
-
-        LogUtil.setLogger(tag, sAppLogger);
-        LogUtil.out(tag, fmt, args);
+        sAppLogger.out(Logger.LEVEL_DEBUG, tag, StringUtil.format(fmt, args));
     }
 }
