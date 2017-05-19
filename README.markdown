@@ -14,7 +14,7 @@
 | 想定される開発ブランチ | 内容 | ビルドステータス |
 |---|---|---|
 | master | 最新ビルド（Nightly Build対象） | [![CircleCI](https://circleci.com/gh/eaglesakura/android-app-template/tree/master.svg?style=svg)](https://circleci.com/gh/eaglesakura/android-app-template/tree/master) |
-| develop | 最新の開発版, DEBUG版デプロイ用 | - |
+| develop | 最新の開発版, DEBUG版デプロイ用 | ![CircleCI](https://circleci.com/gh/eaglesakura/android-app-template/tree/develop.svg?style=svg)](https://circleci.com/gh/eaglesakura/android-app-template/tree/develop) |
 | feature/id/{issue num} | issue対応 | - |
 | v${バージョン名} | リリースビルド | - |
 
