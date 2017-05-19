@@ -34,36 +34,36 @@ dependencies {
      * https://developers.google.com/android/guides/overview
      * https://developers.google.com/android/guides/init
      */
-//    compile "com.google.android.gms:play-services-plus:10.2.0"        // Google+
-//    compile "com.google.android.gms:play-services-auth:10.2.0"        // Google Login
-//    compile "com.google.android.gms:play-services-identity:10.2.0"    // Google Address API
-//    compile "com.google.android.gms:play-services-analytics:10.2.0"   // Google Analytics
-//    compile "com.google.android.gms:play-services-awareness:10.2.0"   // Google Awareness
-//    compile "com.google.android.gms:play-services-cast:10.2.0"        // Google Cast
-//    compile "com.google.android.gms:play-services-gcm:10.2.0"         // Google Cloud Messaging
-//    compile "com.google.android.gms:play-services-drive:10.2.0"       // Google Drive
-//    compile "com.google.android.gms:play-services-fitness:10.2.0"     // Google Fit
-//    compile "com.google.android.gms:play-services-location:10.2.0"    // Google Location and Activity Recognition
-//    compile "com.google.android.gms:play-services-maps:10.2.0"        // Google Maps
-//    compile "com.google.android.gms:play-services-ads:10.2.0"         // Google Mobile Ads
-//    compile "com.google.android.gms:play-services-places:10.2.0"      // Google Places
-//    compile "com.google.android.gms:play-services-vision:10.2.0"      // Mobile Vision
-//    compile "com.google.android.gms:play-services-nearby:10.2.0"      // Google Nearby
-//    compile "com.google.android.gms:play-services-panorama:10.2.0"    // Google Panorama Viewer
-//    compile "com.google.android.gms:play-services-games:10.2.0"       // Google Play Game services
-//    compile "com.google.android.gms:play-services-safetynet:10.2.0"   // SafetyNet
-//    compile "com.google.android.gms:play-services-wallet:10.2.0"      // Android Pay
-//    compile "com.google.android.gms:play-services-wearable:10.2.0"    // Android Wear
+//    compile "com.google.android.gms:play-services-plus:10.2.4"        // Google+
+//    compile "com.google.android.gms:play-services-auth:10.2.4"        // Google Login
+//    compile "com.google.android.gms:play-services-identity:10.2.4"    // Google Address API
+//    compile "com.google.android.gms:play-services-analytics:10.2.4"   // Google Analytics
+//    compile "com.google.android.gms:play-services-awareness:10.2.4"   // Google Awareness
+//    compile "com.google.android.gms:play-services-cast:10.2.4"        // Google Cast
+//    compile "com.google.android.gms:play-services-gcm:10.2.4"         // Google Cloud Messaging
+//    compile "com.google.android.gms:play-services-drive:10.2.4"       // Google Drive
+//    compile "com.google.android.gms:play-services-fitness:10.2.4"     // Google Fit
+//    compile "com.google.android.gms:play-services-location:10.2.4"    // Google Location and Activity Recognition
+//    compile "com.google.android.gms:play-services-maps:10.2.4"        // Google Maps
+//    compile "com.google.android.gms:play-services-ads:10.2.4"         // Google Mobile Ads
+//    compile "com.google.android.gms:play-services-places:10.2.4"      // Google Places
+//    compile "com.google.android.gms:play-services-vision:10.2.4"      // Mobile Vision
+//    compile "com.google.android.gms:play-services-nearby:10.2.4"      // Google Nearby
+//    compile "com.google.android.gms:play-services-panorama:10.2.4"    // Google Panorama Viewer
+//    compile "com.google.android.gms:play-services-games:10.2.4"       // Google Play Game services
+//    compile "com.google.android.gms:play-services-safetynet:10.2.4"   // SafetyNet
+//    compile "com.google.android.gms:play-services-wallet:10.2.4"      // Android Pay
+//    compile "com.google.android.gms:play-services-wearable:10.2.4"    // Android Wear
 
     /**
      * Firebase
      */
-//    compile "com.google.firebase:firebase-appindexing:10.2.0"         // App Indexing
-//    compile "com.google.firebase:firebase-core:10.2.0"                // Firebase Core
-//    compile "com.google.firebase:firebase-auth:10.2.0"                // Firebase Auth
-//    compile "com.google.firebase:firebase-config:10.2.0"              // Firebase Remote Configs
-//    compile "com.google.firebase:firebase-database:10.2.0"            // Firebase Realtime Database
-//    releaseCompile "com.google.firebase:firebase-crash:10.2.0"
+//    compile "com.google.firebase:firebase-appindexing:10.2.4"         // App Indexing
+//    compile "com.google.firebase:firebase-core:10.2.4"                // Firebase Core
+//    compile "com.google.firebase:firebase-auth:10.2.4"                // Firebase Auth
+//    compile "com.google.firebase:firebase-config:10.2.4"              // Firebase Remote Configs
+//    compile "com.google.firebase:firebase-database:10.2.4"            // Firebase Realtime Database
+//    releaseCompile "com.google.firebase:firebase-crash:10.2.4"
 
     /**
      * Remote Debug
@@ -85,7 +85,7 @@ dependencies {
          * 標準フレームワーク
          */
         compile "com.eaglesakura:greendao-wrapper:2.2.459"
-        compile "com.eaglesakura:sloth-framework:3.25.0.6"
+        compile "com.eaglesakura:sloth-framework:3.25.0.12"
 
         /**
          * Optional
@@ -99,12 +99,12 @@ dependencies {
         /**
          * UnitTest
          */
-        androidTestCompile("com.eaglesakura:android-devicetest-support:2.1.272") {
+        androidTestCompile("com.eaglesakura:android-devicetest-support:2.1.273") {
             exclude(group: "com.eaglesakura", module: "java-commons")
             exclude(group: "com.eaglesakura", module: "android-commons")
             exclude(group: "com.android.support")
         }
-        testCompile("com.eaglesakura:android-unittest-support:1.4.207") {
+        testCompile("com.eaglesakura:android-unittest-support:1.4.208") {
             exclude(group: "com.eaglesakura", module: "java-commons")
             exclude(group: "com.eaglesakura", module: "android-commons")
             exclude(group: "com.android.support")
@@ -158,7 +158,7 @@ android {
          * FIXME: ApplicationID(package name)に書き換える
          */
         applicationId "replace.your.app_package"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 25
 
         versionCode eglibrary.ci.buildVersionCode as int
