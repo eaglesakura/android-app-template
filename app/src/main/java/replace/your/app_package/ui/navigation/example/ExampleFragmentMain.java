@@ -69,4 +69,8 @@ public class ExampleFragmentMain extends AppNavigationFragment {
         mAppSettings.getDebugSetting().setDebugEnable(checked);
         mAppSettings.commit();
     }
+
+    public interface BindItem {
+        String getTitle();
+    }
 }
