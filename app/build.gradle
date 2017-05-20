@@ -6,12 +6,12 @@ def APP_VERSION = "1.0"
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.eaglesakura.ci-support'
-apply plugin: 'me.tatarka.retrolambda' /* Android Lambda */
+//apply plugin: 'me.tatarka.retrolambda' /* Android Lambda */
 
-configurations {
-    all*.exclude group: "com.google.code.findbugs", module: "jsr305"
-    all*.exclude group: "org.apache.httpcomponents", module: "httpclient"
-}
+//configurations {
+//    all*.exclude group: "com.google.code.findbugs", module: "jsr305"
+//    all*.exclude group: "org.apache.httpcomponents", module: "httpclient"
+//}
 
 dependencies {
     /**
@@ -115,8 +115,8 @@ dependencies {
         /**
          * 標準フレームワーク
          */
-        compile project(":eglibrary:sloth-framework")
-        compile project(":eglibrary:greendao-wrapper")
+        implementation project(":eglibrary:sloth-framework")
+        implementation project(":eglibrary:greendao-wrapper")
 
         /**
          * Optional
@@ -129,8 +129,8 @@ dependencies {
         /**
          * UnitTest
          */
-        androidTestCompile project(":eglibrary:android-devicetest-support")
-        testCompile project(":eglibrary:android-unittest-support")
+        androidTestImplementation project(":eglibrary:android-devicetest-support")
+        testImplementation project(":eglibrary:android-unittest-support")
     }
 
     /**
@@ -144,14 +144,18 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_7
+    if (project.hasProperty("devBuild")) {
+        aaptOptions.cruncherEnabled = false
     }
 
-    dataBinding {
-        enabled = true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
+
+//    dataBinding {
+//        enabled = true
+//    }
 
     defaultConfig {
         /**
@@ -168,10 +172,14 @@ android {
         /**
          * BuildConfig情報を必要に応じて追加する
          */
-        buildConfigField "String", "BUILD_DATE", "\"${eglibrary.ci.buildDate}\""
-        buildConfigField "String", "BASE_APP_VERSION", "\"${APP_VERSION}\"";
-        buildConfigField "int", "BUILD_NUMBER", "${eglibrary.ci.buildVersionCode as int}";  // ビルド番号
-        buildConfigField "boolean", "BUILD_FROM_CI", "${eglibrary.ci.ciRunning}";  // CIフラグ
+        if (project.hasProperty("devBuild")) {
+            buildConfigField "String", "BUILD_DATE", "\"date-devBuild\""
+        } else {
+            buildConfigField "String", "BUILD_DATE", "\"${eglibrary.ci.buildDate}\""
+        }
+        buildConfigField "String", "BASE_APP_VERSION", "\"${APP_VERSION}\""
+        buildConfigField "int", "BUILD_NUMBER", "${eglibrary.ci.buildVersionCode as int}"  // ビルド番号
+        buildConfigField "boolean", "BUILD_FROM_CI", "${eglibrary.ci.ciRunning}"  // CIフラグ
 
         /**
          * AndroidManifest.xmlの動的書き換えを利用する
@@ -218,12 +226,26 @@ android {
         }
     }
 
-//    productFlavors {
-//        // 必要に応じて追加する
-//        develop {
-//            minSdkVersion 21
-//        }
-//    }
+    /**
+     * ビルドフレーバー種別一覧
+     */
+    flavorDimensions "machine"
+
+    productFlavors {
+        /**
+         * Android Studioでのローカルビルド設定
+         */
+        studio {
+            dimension "machine"
+
+            minSdkVersion 21
+
+            /**
+             * 日本語とxxxhdpiリソースのみを残す
+             */
+            resConfigs "ja", DEVELOER_TARGET_RESOURCE_DPI
+        }
+    }
 
 
     buildTypes {
@@ -231,6 +253,8 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             signingConfig signingConfigs.debug
+
+            ext.alwaysUpdateBuildId = false
         }
 
         release {
@@ -242,9 +266,9 @@ android {
 
     dexOptions {
         // memo: http://developer.covelline.com/2015/06/circle-ci/
-        javaMaxHeapSize eglibrary.ci.ciRunning ? "1g" : "4g"
-        maxProcessCount eglibrary.ci.ciRunning ? 1 : 4
-        threadCount eglibrary.ci.ciRunning ? 1 : 8
+        javaMaxHeapSize eglibrary.ci.ciRunning ? "1g" : DEVELOER_ANDROID_DEX_MAXHEAP
+        maxProcessCount eglibrary.ci.ciRunning ? 1 : DEVELOER_ANDROID_DEX_MAXPROCESS
+        threadCount eglibrary.ci.ciRunning ? 1 : (DEVELOER_ANDROID_DEX_MAXPROCESS * 2)
         preDexLibraries !eglibrary.ci.ciRunning
     }
 
@@ -281,21 +305,21 @@ android {
     }
 }
 
-/**
- * UnitTest & retro lambda
- */
-tasks.withType(Test) {
-    project.tasks
-            .findAll {
-        task -> (task.name ==~ /compile.*?TestJava.*?/)
-    }
-    .each { task ->
-        task.doFirst {
-            sourceCompatibility = JavaVersion.VERSION_1_8
-            targetCompatibility = JavaVersion.VERSION_1_8
-        }
-    }
-}
+///**
+// * UnitTest & retro lambda
+// */
+//tasks.withType(Test) {
+//    project.tasks
+//            .findAll {
+//        task -> (task.name ==~ /compile.*?TestJava.*?/)
+//    }
+//    .each { task ->
+//        task.doFirst {
+//            sourceCompatibility = JavaVersion.VERSION_1_8
+//            targetCompatibility = JavaVersion.VERSION_1_8
+//        }
+//    }
+//}
 
 /**
  * バージョンを取得する
@@ -311,35 +335,35 @@ def getArtifactVersionSuffix() {
 }
 
 apply from: "generator.gradle"
+apply plugin: 'com.github.ben-manes.versions'
 
 /**
  * Slackに通知を行なう
  */
-apply plugin: 'com.mindera.gradle.slack'
-apply plugin: 'com.github.ben-manes.versions'
+//apply plugin: 'com.mindera.gradle.slack'
 
-slack {
-    url System.getenv("SLACK_HOOK_URL");
-    dependsOnTasks 'assembleDebug', 'assembleRelease', 'testDebugUnitTest', 'dependencyUpdates';
-    title file("../").name;
-    enabled = eglibrary.ci.ciRunning && (System.getenv("SLACK_HOOK_URL") != null)
-//    enabled = true
-    gitInfo = true
-}
+//slack {
+//    url System.getenv("SLACK_HOOK_URL");
+//    dependsOnTasks 'assembleDebug', 'assembleRelease', 'testDebugUnitTest', 'dependencyUpdates';
+//    title file("../").name;
+//    enabled = eglibrary.ci.ciRunning && (System.getenv("SLACK_HOOK_URL") != null)
+////    enabled = true
+//    gitInfo = true
+//}
 
-/**
- * Dexで使用されているメソッド数の統計を取る
- * dexcountはGradle 3.3に非対応のため、一旦削除する
- */
-apply plugin: 'com.getkeepsafe.dexcount'
-dexcount {
-    format = "json"
-    includeClasses = false
-    includeFieldCount = true
-    includeTotalMethodCount = true
-    orderByMethodCount = true
-    verbose = false
-}
+///**
+// * Dexで使用されているメソッド数の統計を取る
+// * dexcountはGradle 3.3に非対応のため、一旦削除する
+// */
+//apply plugin: 'com.getkeepsafe.dexcount'
+//dexcount {
+//    format = "json"
+//    includeClasses = false
+//    includeFieldCount = true
+//    includeTotalMethodCount = true
+//    orderByMethodCount = true
+//    verbose = false
+//}
 
 /**
  * FIXME: Google Play Serviceを利用する場合は有効化する

@@ -1,3 +1,7 @@
+ext.DEVELOER_ANDROID_DEX_MAXHEAP = "8g"
+ext.DEVELOER_ANDROID_DEX_MAXPROCESS = 4
+ext.DEVELOER_TARGET_RESOURCE_DPI = "xxhdpi"
+
 /**
  * デバッグ用署名設定
  *

@@ -1,15 +1,15 @@
 buildscript {
     repositories {
-        jcenter()
         maven { url "https://maven.google.com" }
-        maven { url "https://jitpack.io" }
+        jcenter()
+//        maven { url "https://jitpack.io" }
         maven { url "https://dl.bintray.com/eaglesakura/maven/" }
     }
 
     dependencies {
         // Build Plugins
         classpath 'com.android.tools.build:gradle:3.0.0-alpha1'    // Android Studioバージョンにリンクする
-        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
+//        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
         classpath 'com.google.gms:google-services:3.0.0'
         classpath "com.eaglesakura:plugin-ci-support:1.2.200"
 
@@ -18,8 +18,8 @@ buildscript {
         classpath "com.eaglesakura:plugin-android-mipmap:1.1.156"
 
         // Notifications
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.3'
-        classpath 'com.github.operando:gradle-slack-plugin:1.1.0'
+//        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.3'
+//        classpath 'com.github.operando:gradle-slack-plugin:1.1.0'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
 
         // Deploy
@@ -29,8 +29,8 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         maven { url "https://maven.google.com" }
+        jcenter()
         maven { url "https://clojars.org/repo/" }
         maven { url "https://dl.bintray.com/eaglesakura/maven/" }
     }
@@ -42,4 +42,4 @@ task clean(type: Delete) {
 
 // APIキー等の隠蔽したいデータを配置
 apply from: "private/private.gradle"
-apply from: "deploy.gradle"
+//apply from: "deploy.gradle"
