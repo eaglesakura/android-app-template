@@ -2,14 +2,12 @@ buildscript {
     repositories {
         maven { url "https://maven.google.com" }
         jcenter()
-//        maven { url "https://jitpack.io" }
         maven { url "https://dl.bintray.com/eaglesakura/maven/" }
     }
 
     dependencies {
         // Build Plugins
         classpath 'com.android.tools.build:gradle:3.0.0-alpha1'    // Android Studioバージョンにリンクする
-//        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
         classpath 'com.google.gms:google-services:3.0.0'
         classpath "com.eaglesakura:plugin-ci-support:1.2.200"
 

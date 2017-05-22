@@ -12,7 +12,7 @@ find . -type f -regex ".*/build/test-results/$1/.*xml" -exec cp {} $CIRCLE_TEST_
 }
 
 # テスト実行
-./gradlew -PpreDexEnable=false -Pcom.android.build.threadPoolSize=1  \
+./gradlew \
           :app:testDebugUnitTest
 
 
