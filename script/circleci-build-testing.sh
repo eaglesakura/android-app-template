@@ -13,7 +13,7 @@ find . -type f -regex ".*/build/test-results/$1/.*xml" -exec cp {} $CIRCLE_TEST_
 
 # テスト実行
 ./gradlew \
-          :app:testDebugUnitTest
+          :app:testDevelopDebugUnitTest
 
 
 if [ $? -ne 0 ]; then
