@@ -1,6 +1,6 @@
 package replace.your.app_package;
 
-import com.eaglesakura.sloth.ui.support.SupportActivity;
+import com.eaglesakura.sloth.app.SlothActivity;
 import com.eaglesakura.util.Util;
 
 import org.junit.Rule;
@@ -11,7 +11,7 @@ import android.support.test.rule.ActivityTestRule;
 /**
  * シナリオテスト用
  */
-public abstract class AppScenarioTest<ActivityClass extends SupportActivity> extends AppDeviceTestCase {
+public abstract class AppScenarioTest<ActivityClass extends SlothActivity> extends AppDeviceTestCase {
 
     @Rule
     public final ActivityTestRule<ActivityClass> mRule;
