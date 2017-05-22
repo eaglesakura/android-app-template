@@ -92,18 +92,18 @@ dependencies {
 //    compile "com.eaglesakura:geo-utils:1.0.420"
 //    compile "com.eaglesakura:android-camera:1.1.145"
 //    compile "com.eaglesakura:android-bluetooth:1.1.450"
-//    compile "com.eaglesakura:android-gms:1.10.1.108"
+//    compile "com.eaglesakura:android-gms:1.10.2.111"
 //    compile "com.eaglesakura:android-firebase:1.10.1.133"
 
         /**
          * UnitTest
          */
-        androidTestCompile("com.eaglesakura:android-devicetest-support:2.1.273") {
+        androidTestCompile("com.eaglesakura:android-devicetest-support:2.2.275") {
             exclude(group: "com.eaglesakura", module: "java-commons")
             exclude(group: "com.eaglesakura", module: "android-commons")
             exclude(group: "com.android.support")
         }
-        testCompile("com.eaglesakura:android-unittest-support:1.4.208") {
+        testCompile("com.eaglesakura:android-unittest-support:1.5.211") {
             exclude(group: "com.eaglesakura", module: "java-commons")
             exclude(group: "com.eaglesakura", module: "android-commons")
             exclude(group: "com.android.support")
