@@ -5,5 +5,6 @@
 ./gradlew \
           :app:assembleDevelopDebug \
           :app:assembleProductRelease \
+          :app:assembleDevelopDebugAndroidTest \
           ciCollectAndroidApps
 #          :app:assembleGoogleplayDebug :app:assembleGoogleplayRelease
