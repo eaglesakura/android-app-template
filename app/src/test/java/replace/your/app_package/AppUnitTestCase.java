@@ -3,13 +3,18 @@ package replace.your.app_package;
 import com.eaglesakura.android.AndroidSupportTestCase;
 import com.eaglesakura.android.garnet.Garnet;
 
+import org.junit.runner.RunWith;
+
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import replace.your.app_package.provider.AppContextProvider;
 import replace.your.app_package.provider.TestAppContextProvider;
 import replace.your.app_package.util.AppLog;
 
-@Config(constants = BuildConfig.class, packageName = BuildConfig.APPLICATION_ID, sdk = 23)
+/**
+ * ASのUnitTestではWorkingDirectory設定を行う。
+ */
 public abstract class AppUnitTestCase extends AndroidSupportTestCase {
 
     @Override

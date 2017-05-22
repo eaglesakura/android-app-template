@@ -3,7 +3,12 @@ package replace.your.app_package;
 import com.eaglesakura.thread.Holder;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import org.robolectric.annotation.Config;
+
+@RunWith(AppJvmTestRunner.class)
+@Config(constants = BuildConfig.class, packageName = BuildConfig.APPLICATION_ID, sdk = 23)
 public class AppBuildConfigTest extends AppUnitTestCase {
     @Test
     public void 正しいClassがロードできている() throws Exception {

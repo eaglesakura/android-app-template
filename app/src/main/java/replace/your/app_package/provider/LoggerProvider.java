@@ -17,7 +17,7 @@ public class LoggerProvider implements Provider {
 
     Context mContext;
 
-    boolean mDebugable;
+    boolean mDebuggable;
 
     @Depend(require = true)
     public void setContext(Context context) {
@@ -26,19 +26,11 @@ public class LoggerProvider implements Provider {
 
     @Override
     public void onDependsCompleted(Object inject) {
-        mDebugable = ContextUtil.isDebug(mContext);
+        mDebuggable = ContextUtil.isDebug(mContext);
     }
 
     @Override
     public void onInjectCompleted(Object inject) {
-    }
-
-    /**
-     * デフォルトで使用するロガーを指定する
-     */
-    @Provide(name = NAME_DEFAULT)
-    public Logger.Impl provideDefaultLogger() {
-        return new Logger.AndroidLogger(Log.class).setStackInfo(mDebugable);
     }
 
     @Provide(name = NAME_APPLOG)
@@ -48,6 +40,6 @@ public class LoggerProvider implements Provider {
             protected int getStackDepth() {
                 return super.getStackDepth() + 1;
             }
-        }.setStackInfo(mDebugable);
+        }.setStackInfo(mDebuggable);
     }
 }
