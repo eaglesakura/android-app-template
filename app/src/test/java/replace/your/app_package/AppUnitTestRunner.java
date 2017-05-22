@@ -12,8 +12,8 @@ import org.robolectric.res.Fs;
  *
  * https://github.com/robolectric/robolectric/issues/1430
  */
-public class AppJvmTestRunner extends RobolectricTestRunner {
-    public AppJvmTestRunner(Class<?> testClass) throws InitializationError {
+public class AppUnitTestRunner extends RobolectricTestRunner {
+    public AppUnitTestRunner(Class<?> testClass) throws InitializationError {
         super(testClass);
     }
 

@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 import org.robolectric.annotation.Config;
 
-@RunWith(AppJvmTestRunner.class)
+@RunWith(AppUnitTestRunner.class)
 @Config(constants = BuildConfig.class, packageName = BuildConfig.APPLICATION_ID, sdk = 23)
 public class AppBuildConfigTest extends AppUnitTestCase {
     @Test
