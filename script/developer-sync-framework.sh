@@ -9,6 +9,6 @@ fi
 cd eglibrary/
 git clean -f .
 git pull origin master
-chmod 755 ./script/sync-develop.sh
-./script/sync-develop.sh
+chmod 755 ./script/repo-sync.sh
+./script/repo-sync.sh
 cd ../
