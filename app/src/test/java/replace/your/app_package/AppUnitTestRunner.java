@@ -23,7 +23,7 @@ public class AppUnitTestRunner extends RobolectricTestRunner {
                 BuildConfig.FLAVOR, BuildConfig.BUILD_TYPE);
         String res = String.format("build/intermediates/res/merged/%1$s/%2$s",
                 BuildConfig.FLAVOR, BuildConfig.BUILD_TYPE);
-        String asset = String.format("build/intermediates/assets/1$s/%2$s",
+        String asset = String.format("build/intermediates/assets/%1$s/%2$s",
                 BuildConfig.FLAVOR, BuildConfig.BUILD_TYPE);
         return new AndroidManifest(Fs.fileFromPath(manifest), Fs.fileFromPath(res),
                 Fs.fileFromPath(asset)) {

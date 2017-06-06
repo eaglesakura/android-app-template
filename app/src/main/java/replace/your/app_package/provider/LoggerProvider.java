@@ -10,9 +10,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class LoggerProvider implements Provider {
-
-    public static final String NAME_DEFAULT = "fw.default";
-
     public static final String NAME_APPLOG = "app.default";
 
     Context mContext;

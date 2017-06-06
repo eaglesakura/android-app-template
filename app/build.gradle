@@ -93,12 +93,12 @@ dependencies {
         /**
          * UnitTest
          */
-        androidTestCompile("com.eaglesakura:android-devicetest-support:2.2.275") {
+        androidTestImplementation("com.eaglesakura:android-devicetest-support:2.2.275") {
             exclude(group: "com.eaglesakura", module: "java-commons")
             exclude(group: "com.eaglesakura", module: "android-commons")
             exclude(group: "com.android.support")
         }
-        testCompile("com.eaglesakura:android-unittest-support:1.5.211") {
+        testImplementation("com.eaglesakura:android-unittest-support:1.5.211") {
             exclude(group: "com.eaglesakura", module: "java-commons")
             exclude(group: "com.eaglesakura", module: "android-commons")
             exclude(group: "com.android.support")
@@ -137,7 +137,7 @@ dependencies {
         androidTestCompile project(":eglibrary:junit-support")
         androidTestImplementation project(":eglibrary:android-devicetest-support")
 
-        testCompile project(":eglibrary:junit-support")
+        testImplementation project(":eglibrary:junit-support")
         testImplementation project(":eglibrary:android-unittest-support")
     }
 
@@ -152,13 +152,29 @@ dependencies {
 //    compile "org.apache.commons:commons-lang3:3.5"
 }
 
+/**
+ * Android Studioでのビルドとそれ以外を切り分ける
+ */
+if (project.hasProperty("devBuild")) {
+    ext.ANDROID_STUDIO = true
+    ext.ANDROID_BUILD_DATE = "\"date-devBuild\""
+    ext.ANDROID_BUILD_ON_CI = "${Boolean.FALSE}"
+    ext.ANDROID_BUILD_NUMBER = "1"
+} else {
+    ext.ANDROID_STUDIO = false
+    ext.ANDROID_BUILD_DATE = "\"${eglibrary.ci.buildDate}\""
+    ext.ANDROID_BUILD_ON_CI = "${eglibrary.ci.ciRunning}"
+    ext.ANDROID_BUILD_NUMBER = "${eglibrary.ci.buildVersionCode as int}"
+}
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
-    if (project.hasProperty("devBuild")) {
+    if (ANDROID_STUDIO) {
         aaptOptions.cruncherEnabled = false
+    } else {
+        aaptOptions.cruncherEnabled = false // FIXME! AAPT2の不具合かと思われるが、ImageMagicで出力した画像がエラーとなる
     }
 
     compileOptions {
@@ -185,14 +201,10 @@ android {
         /**
          * BuildConfig情報を必要に応じて追加する
          */
-        if (project.hasProperty("devBuild")) {
-            buildConfigField "String", "BUILD_DATE", "\"date-devBuild\""
-        } else {
-            buildConfigField "String", "BUILD_DATE", "\"${eglibrary.ci.buildDate}\""
-        }
+        buildConfigField "String", "BUILD_DATE", ANDROID_BUILD_DATE
         buildConfigField "String", "BASE_APP_VERSION", "\"${APP_VERSION}\""
-        buildConfigField "int", "BUILD_NUMBER", "${eglibrary.ci.buildVersionCode as int}"  // ビルド番号
-        buildConfigField "boolean", "BUILD_FROM_CI", "${eglibrary.ci.ciRunning}"  // CIフラグ
+        buildConfigField "int", "BUILD_NUMBER", ANDROID_BUILD_NUMBER  // ビルド番号
+        buildConfigField "boolean", "BUILD_FROM_CI", ANDROID_BUILD_ON_CI  // CIフラグ
 
         /**
          * AndroidManifest.xmlの動的書き換えを利用する
@@ -343,16 +355,16 @@ apply plugin: 'com.github.ben-manes.versions'
 /**
  * Slackに通知を行なう
  */
-//apply plugin: 'com.mindera.gradle.slack'
+apply plugin: 'com.mindera.gradle.slack'
 
-//slack {
-//    url System.getenv("SLACK_HOOK_URL");
-//    dependsOnTasks 'assembleDebug', 'assembleRelease', 'testDebugUnitTest', 'dependencyUpdates';
-//    title file("../").name;
-//    enabled = eglibrary.ci.ciRunning && (System.getenv("SLACK_HOOK_URL") != null)
-////    enabled = true
-//    gitInfo = true
-//}
+slack {
+    url System.getenv("SLACK_HOOK_URL")
+    dependsOnTasks 'assembleDevelopDebug', 'assembleProductRelease', 'testDevelopDebugUnitTest', 'dependencyUpdates'
+    title file("../").name
+    enabled = (System.getenv("SLACK_HOOK_URL") != null)
+//    enabled = true
+    gitInfo = true
+}
 
 ///**
 // * Dexで使用されているメソッド数の統計を取る

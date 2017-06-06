@@ -3,8 +3,10 @@ package replace.your.app_package.ui.navigation.example;
 import com.eaglesakura.android.garnet.Inject;
 import com.eaglesakura.android.margarine.Bind;
 import com.eaglesakura.android.margarine.OnCheckedChanged;
-import com.eaglesakura.sloth.ui.progress.ProgressToken;
+import com.eaglesakura.android.margarine.OnClick;
 import com.eaglesakura.sloth.annotation.FragmentLayout;
+import com.eaglesakura.sloth.ui.license.LicenseViewActivity;
+import com.eaglesakura.sloth.ui.progress.ProgressToken;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -68,6 +70,11 @@ public class ExampleFragmentMain extends AppNavigationFragment {
     void changedDebuggable(boolean checked) {
         mAppSettings.getDebugSetting().setDebugEnable(checked);
         mAppSettings.commit();
+    }
+
+    @OnClick(R.id.Button_Example_ShowLicense)
+    void clickShowLicense() {
+        LicenseViewActivity.startContent(getContext());
     }
 
     public interface BindItem {

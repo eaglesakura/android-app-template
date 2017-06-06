@@ -3,11 +3,12 @@ buildscript {
         maven { url "https://maven.google.com" }
         jcenter()
         maven { url "https://dl.bintray.com/eaglesakura/maven/" }
+        maven { url 'https://jitpack.io' }
     }
 
     dependencies {
         // Build Plugins
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha1'    // Android Studioバージョンにリンクする
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha3'    // Android Studioバージョンにリンクする
         classpath 'com.google.gms:google-services:3.0.0'
         classpath "com.eaglesakura:plugin-ci-support:1.2.200"
 
@@ -16,8 +17,8 @@ buildscript {
         classpath "com.eaglesakura:plugin-android-mipmap:1.1.156"
 
         // Notifications
-//        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.3'
-//        classpath 'com.github.operando:gradle-slack-plugin:1.1.0'
+//        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.4'
+        classpath 'com.github.operando:gradle-slack-plugin:1.2.0'   // https://jitpack.io
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
 
         // Deploy

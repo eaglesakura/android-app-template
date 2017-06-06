@@ -10,6 +10,12 @@
             android:layout_height="wrap_content"
             android:text="Hello World!"/>
 
+    <android.support.v7.widget.AppCompatButton
+            android:id="@+id/Button.Example.ShowLicense"
+            android:text="Show Licenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     <android.support.v7.widget.SwitchCompat
             android:id="@+id/Example.Item.Debuggable"
             android:text="デバッグ有効化"
