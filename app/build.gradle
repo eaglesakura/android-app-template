@@ -110,11 +110,11 @@ dependencies {
          * 標準フレームワーク
          */
         implementation project(":eglibrary:sloth-framework")
-        implementation project(":eglibrary:greendao-wrapper")
+        implementation project(":eglibrary:greendao-wrapper")   // TODO: Roomに移行する
 
         // 2階層依存
-        // TODO: これはAS3.0 P1時点での暫定措置となる可能性が高い
         implementation project(":eglibrary:android-commons")
+        implementation project(":eglibrary:json-wrapper")
         implementation project(":eglibrary:garnet")
         implementation project(":eglibrary:alternet")
         implementation project(":eglibrary:margarineknife")
@@ -126,15 +126,14 @@ dependencies {
         /**
          * Optional
          */
-//        compile project(':eglibrary:android-camera')            // Camera API対応
-//        compile project(':eglibrary:android-bluetooth')         // Bluetooth対応
-//        compile project(":eglibrary:android-gms")               // Google Play Service対応
-//        compile project(":eglibrary:android-firebase")          // Firebase対応
+//        implementation project(':eglibrary:android-camera')            // Camera API対応
+//        implementation project(':eglibrary:android-bluetooth')         // Bluetooth対応
+//        implementation project(":eglibrary:android-gms")               // Google Play Service対応
+//        implementation project(":eglibrary:android-firebase")          // Firebase対応
 
         /**
          * UnitTest
          */
-        androidTestCompile project(":eglibrary:junit-support")
         androidTestImplementation project(":eglibrary:android-devicetest-support")
 
         testImplementation project(":eglibrary:junit-support")
@@ -159,12 +158,14 @@ if (project.hasProperty("devBuild")) {
     ext.ANDROID_STUDIO = true
     ext.ANDROID_BUILD_DATE = "\"date-devBuild\""
     ext.ANDROID_BUILD_ON_CI = "${Boolean.FALSE}"
-    ext.ANDROID_BUILD_NUMBER = "1"
+    ext.ANDROID_BUILD_NUMBER = 1
+    ext.ANDROID_BUILD_NAME = "${APP_VERSION}.devBuild"
 } else {
     ext.ANDROID_STUDIO = false
     ext.ANDROID_BUILD_DATE = "\"${eglibrary.ci.buildDate}\""
     ext.ANDROID_BUILD_ON_CI = "${eglibrary.ci.ciRunning}"
-    ext.ANDROID_BUILD_NUMBER = "${eglibrary.ci.buildVersionCode as int}"
+    ext.ANDROID_BUILD_NUMBER = eglibrary.ci.buildVersionCode as int
+    ext.ANDROID_BUILD_NAME = "${APP_VERSION}${getArtifactVersionSuffix()}"
 }
 
 android {
@@ -173,8 +174,6 @@ android {
 
     if (ANDROID_STUDIO) {
         aaptOptions.cruncherEnabled = false
-    } else {
-        aaptOptions.cruncherEnabled = false // FIXME! AAPT2の不具合かと思われるが、ImageMagicで出力した画像がエラーとなる
     }
 
     compileOptions {
@@ -194,8 +193,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 25
 
-        versionCode eglibrary.ci.buildVersionCode as int
-        versionName "${APP_VERSION}${getArtifactVersionSuffix()}"
+        versionCode ANDROID_BUILD_NUMBER
+        versionName ANDROID_BUILD_NAME
         vectorDrawables.useSupportLibrary = true        // using vector getDrawable
 
         /**
@@ -203,7 +202,7 @@ android {
          */
         buildConfigField "String", "BUILD_DATE", ANDROID_BUILD_DATE
         buildConfigField "String", "BASE_APP_VERSION", "\"${APP_VERSION}\""
-        buildConfigField "int", "BUILD_NUMBER", ANDROID_BUILD_NUMBER  // ビルド番号
+        buildConfigField "int", "BUILD_NUMBER", "${ANDROID_BUILD_NUMBER}"  // ビルド番号
         buildConfigField "boolean", "BUILD_FROM_CI", ANDROID_BUILD_ON_CI  // CIフラグ
 
         /**
@@ -212,11 +211,6 @@ android {
         manifestPlaceholders = [
                 google_api_key: "@string/google_api_key"
         ]
-
-        /**
-         * 日本語と英語リソースのみを残す
-         */
-        resConfigs "en", "ja"
 
         /**
          * UnitTest
@@ -276,6 +270,11 @@ android {
          */
         product {
             dimension "machine"
+
+            /**
+             * 日本語と英語リソースのみを残す
+             */
+            resConfigs "en", "ja"
         }
     }
 
