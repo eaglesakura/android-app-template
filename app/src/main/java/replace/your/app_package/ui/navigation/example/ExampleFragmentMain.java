@@ -4,6 +4,8 @@ import com.eaglesakura.android.garnet.Inject;
 import com.eaglesakura.android.margarine.Bind;
 import com.eaglesakura.android.margarine.OnCheckedChanged;
 import com.eaglesakura.android.margarine.OnClick;
+import com.eaglesakura.cerberus.CallbackTime;
+import com.eaglesakura.cerberus.ExecuteTarget;
 import com.eaglesakura.sloth.annotation.FragmentLayout;
 import com.eaglesakura.sloth.ui.license.LicenseViewActivity;
 import com.eaglesakura.sloth.ui.progress.ProgressToken;
@@ -43,7 +45,7 @@ public class ExampleFragmentMain extends AppNavigationFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 非同期処理を行なう
-        asyncQueue(task -> {
+        getLifecycle().async(ExecuteTarget.LocalQueue, CallbackTime.FireAndForget, task -> {
             try (ProgressToken token = pushProgress(R.string.EsMaterial_Word_Common_DataLoad)) {
                 // 適当な非同期処理
                 // ダミーで5秒間スリープ
@@ -52,7 +54,10 @@ public class ExampleFragmentMain extends AppNavigationFragment {
             }
         }).completed((result, task) -> {
             AppLog.system("Hello World!!");
-        }).start();
+        }).cancelSignal(this)
+                .canceled(task -> {
+                    AppLog.system("Task Canceled...");
+                }).start();
     }
 
     @Nullable
