@@ -8,6 +8,8 @@ import com.eaglesakura.android.util.AndroidThreadUtil;
 import com.eaglesakura.sloth.annotation.FragmentLayout;
 import com.eaglesakura.sloth.ui.license.LicenseViewActivity;
 
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.SwitchCompat;
@@ -21,6 +23,7 @@ import replace.your.app_package.repository.AppSettings;
 import replace.your.app_package.provider.AppContextProvider;
 import replace.your.app_package.ui.navigation.base.AppNavigationFragment;
 import replace.your.app_package.ui.viewmodel.example.ExampleAsyncDataViewModel;
+import replace.your.app_package.ui.viewmodel.image.AppImageViewModel;
 import replace.your.app_package.util.AppLog;
 
 /**
@@ -44,9 +47,17 @@ public class ExampleFragmentMain extends AppNavigationFragment {
     @Inject(AppViewModelProvider.class)
     ExampleAsyncDataViewModel mAsyncDataViewModel;
 
+    @Inject(AppViewModelProvider.class)
+    AppImageViewModel mImageViewModel;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mImageViewModel.getFromUri(Uri.parse("https://developer.android.com/images/home/nougat_bg_2x.jpg"))
+                .builder((data, builder) -> builder.errorImage(android.R.drawable.alert_dark_frame, true))
+                .observeForeground(getLifecycle(), image -> {
+                });
 
         // 非同期テスト
         mAsyncDataViewModel.getAsyncTimeData().observeAlive(getLifecycle(), time -> {

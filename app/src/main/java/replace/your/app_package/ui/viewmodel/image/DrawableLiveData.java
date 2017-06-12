@@ -3,6 +3,8 @@ package replace.your.app_package.ui.viewmodel.image;
 import com.eaglesakura.cerberus.BackgroundTask;
 import com.eaglesakura.cerberus.CallbackTime;
 import com.eaglesakura.cerberus.ExecuteTarget;
+import com.eaglesakura.lambda.Action1;
+import com.eaglesakura.lambda.Action2;
 import com.eaglesakura.lambda.CancelCallback;
 import com.eaglesakura.sloth.app.lifecycle.SlothLiveData;
 import com.eaglesakura.sloth.data.SupportCancelCallbackBuilder;
@@ -25,15 +27,6 @@ import replace.your.app_package.util.AppLog;
  */
 public class DrawableLiveData extends SlothLiveData<Drawable> {
 
-    @DrawableRes
-    int mErrorDrawableId;
-
-    /**
-     * 画像のローカルキャッシュを持つ場合はtrue
-     * デフォルトはtrue
-     */
-    boolean mImageCache;
-
     /**
      * キャンセルチェック
      */
@@ -50,26 +43,24 @@ public class DrawableLiveData extends SlothLiveData<Drawable> {
      */
     AppImageRepository mImageRepository;
 
+    /**
+     * Builderの制御を行う
+     */
+    Action2<DrawableLiveData, AppImageRepository.Builder> mBuilderAction;
+
     DrawableLiveData(AppImageRepository repository, Uri uri) {
         mUri = uri;
         mImageRepository = repository;
     }
 
     /**
-     * エラー時のDrawableを指定する
+     * ロード時、{@link AppImageRepository.Builder} に対するアクションを決定する。
      */
-    public DrawableLiveData setErrorDrawableId(@DrawableRes int errorDrawableId) {
-        mErrorDrawableId = errorDrawableId;
+    public DrawableLiveData builder(Action2<DrawableLiveData, AppImageRepository.Builder> action) {
+        mBuilderAction = action;
         return this;
     }
 
-    /**
-     * 画像のキャッシュを持たないならtrue
-     */
-    public DrawableLiveData ignoreImageCache() {
-        mImageCache = true;
-        return this;
-    }
 
     /**
      * キャンセルコールバックをデフォルト以外で指定する
@@ -79,23 +70,21 @@ public class DrawableLiveData extends SlothLiveData<Drawable> {
         return this;
     }
 
-    protected Drawable loadImage(SupportCancelCallbackBuilder cancelCallbackBuilder) throws IOException {
+    protected Drawable loadImage(SupportCancelCallbackBuilder cancelCallbackBuilder) throws Throwable {
         if (mCancelCallback != null) {
             cancelCallbackBuilder.or(mCancelCallback);
         }
 
-        SyncImageLoader.Builder builder = mImageRepository.newImage(mUri, mImageCache);
-        if (mErrorDrawableId != 0) {
-            builder.errorImage(mErrorDrawableId, true);
+        SyncImageLoader.Builder builder = mImageRepository.newImage(mUri, true);
+        if (mBuilderAction != null) {
+            mBuilderAction.action(this, builder);
         }
-
         return builder.await(cancelCallbackBuilder.build());
     }
 
     @Override
     protected void onActive() {
         super.onActive();
-
         getLifecycle().async(ExecuteTarget.LocalParallel, CallbackTime.Alive, (BackgroundTask<Drawable> task) -> {
             return loadImage(SupportCancelCallbackBuilder.from(task));
         }).completed((result, task) -> {
