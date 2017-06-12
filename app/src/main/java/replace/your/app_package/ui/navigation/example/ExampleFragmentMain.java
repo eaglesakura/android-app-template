@@ -57,6 +57,7 @@ public class ExampleFragmentMain extends AppNavigationFragment {
         mImageViewModel.getFromUri(Uri.parse("https://developer.android.com/images/home/nougat_bg_2x.jpg"))
                 .builder((data, builder) -> builder.errorImage(android.R.drawable.alert_dark_frame, true))
                 .observeForeground(getLifecycle(), image -> {
+                    AppLog.test("loaded image size[%d x %d]", image.getBounds().width(), image.getBounds().height());
                 });
 
         // 非同期テスト
