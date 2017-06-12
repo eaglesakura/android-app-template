@@ -12,17 +12,17 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 /**
- * アプリ用ImageLoader
+ * アプリ内で使用する画像管理を行う
  */
-public class AppImageLoader extends SyncImageLoader {
+public class AppImageRepository extends SyncImageLoader {
 
     final private Alternet mNetworkConnector;
 
-    public AppImageLoader(Context context) {
+    public AppImageRepository(Context context) {
         this(context, 5, 5);
     }
 
-    public AppImageLoader(Context context, @IntRange(from = 1) int imageCacheNum, @IntRange(from = 1) int errorCacheNum) {
+    public AppImageRepository(Context context, @IntRange(from = 1) int imageCacheNum, @IntRange(from = 1) int errorCacheNum) {
         super(context, imageCacheNum, errorCacheNum);
         mNetworkConnector = new Alternet(context);
     }
@@ -39,10 +39,5 @@ public class AppImageLoader extends SyncImageLoader {
             // OnMemory経由
             return super.newImage(uri, onMemoryCache);
         }
-    }
-
-    public interface Holder {
-        @NonNull
-        AppImageLoader getImageLoader();
     }
 }

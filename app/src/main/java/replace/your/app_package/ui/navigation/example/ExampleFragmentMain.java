@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import replace.your.app_package.R;
-import replace.your.app_package.provider.viewmodel.ExampleViewModelProvider;
+import replace.your.app_package.provider.AppViewModelProvider;
 import replace.your.app_package.repository.AppSettings;
 import replace.your.app_package.provider.AppContextProvider;
 import replace.your.app_package.ui.navigation.base.AppNavigationFragment;
@@ -41,7 +41,7 @@ public class ExampleFragmentMain extends AppNavigationFragment {
     @Bind(R.id.Example_Item_Debuggable)
     SwitchCompat mDebugSwitch;
 
-    @Inject(ExampleViewModelProvider.class)
+    @Inject(AppViewModelProvider.class)
     ExampleAsyncDataViewModel mAsyncDataViewModel;
 
     @Override
