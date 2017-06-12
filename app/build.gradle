@@ -24,6 +24,13 @@ dependencies {
 //    implementation "com.android.support:customtabs:25.3.1"               // Chrome Custom Tabs
 
     /**
+     * Android Architecture Components
+     */
+    implementation "android.arch.lifecycle:runtime:1.0.0-alpha1"
+    implementation "android.arch.lifecycle:extensions:1.0.0-alpha1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha1"
+
+    /**
      * Play Service
      * https://developers.google.com/android/guides/overview
      * https://developers.google.com/android/guides/init
@@ -169,8 +176,8 @@ if (project.hasProperty("devBuild")) {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
 
     if (ANDROID_STUDIO) {
         aaptOptions.cruncherEnabled = false
@@ -191,7 +198,7 @@ android {
          */
         applicationId "replace.your.app_package"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
 
         versionCode ANDROID_BUILD_NUMBER
         versionName ANDROID_BUILD_NAME

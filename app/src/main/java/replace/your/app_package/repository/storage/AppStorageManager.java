@@ -1,4 +1,4 @@
-package replace.your.app_package.data.storage;
+package replace.your.app_package.repository.storage;
 
 import com.eaglesakura.android.device.external.Storage;
 import com.eaglesakura.android.garnet.Singleton;

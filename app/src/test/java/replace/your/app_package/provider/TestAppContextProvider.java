@@ -1,6 +1,6 @@
 package replace.your.app_package.provider;
 
-import replace.your.app_package.data.setting.AppSettings;
+import replace.your.app_package.repository.AppSettings;
 
 public class TestAppContextProvider extends AppContextProvider {
     @Override

@@ -9,6 +9,7 @@ import com.eaglesakura.sloth.app.support.ViewBindingSupport;
 import com.eaglesakura.sloth.app.lifecycle.FragmentLifecycle;
 import com.eaglesakura.sloth.ui.progress.ProgressToken;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -44,6 +45,7 @@ public abstract class AppFragment extends SlothFragment {
             public Garnet.Builder newInjectionBuilder(Context context) {
                 return Garnet.create(AppFragment.this)
                         .depend(Fragment.class, AppFragment.this)
+                        .depend(Activity.class, getActivity())
                         .depend(Context.class, context);
             }
         });

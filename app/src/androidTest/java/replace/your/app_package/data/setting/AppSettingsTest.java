@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import replace.your.app_package.AppDeviceTestCase;
 import replace.your.app_package.provider.AppContextProvider;
+import replace.your.app_package.repository.AppSettings;
 
 public class AppSettingsTest extends AppDeviceTestCase {
 

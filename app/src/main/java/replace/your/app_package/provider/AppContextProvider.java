@@ -5,7 +5,7 @@ import com.eaglesakura.android.garnet.Provide;
 import com.eaglesakura.android.garnet.Singleton;
 
 import replace.your.app_package.CustomApplication;
-import replace.your.app_package.data.setting.AppSettings;
+import replace.your.app_package.repository.AppSettings;
 
 
 /**

@@ -35,7 +35,7 @@
         <provider android:authorities="${applicationId}"
                   android:exported="false"
                   android:process=":data"
-                  android:name="replace.your.app_package.content.CustomDataProvider"/>
+                  android:name="replace.your.app_package.repository.content.CustomDataProvider"/>
     </application>
 
 </manifest>

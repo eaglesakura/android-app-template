@@ -1,4 +1,4 @@
-package replace.your.app_package.data.setting;
+package replace.your.app_package.repository;
 
 import com.eaglesakura.sloth.db.property.PropertyStore;
 import com.eaglesakura.sloth.db.property.ProviderPropertyStore;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import replace.your.app_package.R;
-import replace.your.app_package.content.CustomDataProvider;
+import replace.your.app_package.repository.content.CustomDataProvider;
 import replace.your.app_package.gen.prop.DebugProps;
 
 /**

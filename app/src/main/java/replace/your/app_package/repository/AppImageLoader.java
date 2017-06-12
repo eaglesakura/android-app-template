@@ -1,4 +1,4 @@
-package replace.your.app_package.data.res;
+package replace.your.app_package.repository;
 
 import com.eaglesakura.alternet.Alternet;
 import com.eaglesakura.alternet.request.ConnectRequest;

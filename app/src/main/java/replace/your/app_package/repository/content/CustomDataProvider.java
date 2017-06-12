@@ -1,4 +1,4 @@
-package replace.your.app_package.content;
+package replace.your.app_package.repository.content;
 
 import com.eaglesakura.sloth.db.ApplicationDataProvider;
 import com.eaglesakura.sloth.db.property.PropertyProviderHandler;
@@ -6,7 +6,7 @@ import com.eaglesakura.sloth.db.property.PropertyProviderHandler;
 import android.content.Context;
 import android.net.Uri;
 
-import replace.your.app_package.data.setting.AppSettings;
+import replace.your.app_package.repository.AppSettings;
 import replace.your.app_package.util.AppLog;
 
 /**

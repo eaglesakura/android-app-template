@@ -1,4 +1,4 @@
-package replace.your.app_package.data.setting;
+package replace.your.app_package.repository;
 
 import android.content.Context;
 

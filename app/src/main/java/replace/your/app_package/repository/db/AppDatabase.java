@@ -1,4 +1,4 @@
-package replace.your.app_package.data.db;
+package replace.your.app_package.repository.db;
 
 import com.eaglesakura.android.db.DaoDatabase;
 import com.eaglesakura.android.garnet.Garnet;
@@ -11,10 +11,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import replace.your.app_package.data.storage.AppStorageManager;
+import replace.your.app_package.repository.storage.AppStorageManager;
 import replace.your.app_package.gen.dao.example.DaoMaster;
 import replace.your.app_package.gen.dao.example.DaoSession;
-import replace.your.app_package.provider.AppStorageProvider;
+import replace.your.app_package.provider.data.AppStorageProvider;
 
 /**
  * アプリデータ用DB

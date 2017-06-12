@@ -1,4 +1,4 @@
-package replace.your.app_package.data;
+package replace.your.app_package.repository;
 
 import com.eaglesakura.android.db.DaoDatabase;
 import com.eaglesakura.android.garnet.Garnet;
@@ -8,8 +8,8 @@ import com.eaglesakura.android.garnet.Inject;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import replace.your.app_package.data.db.AppDatabase;
-import replace.your.app_package.provider.AppDatabaseProvider;
+import replace.your.app_package.repository.db.AppDatabase;
+import replace.your.app_package.provider.data.AppDatabaseProvider;
 
 /**
  * アプリデータ管理用Managerの基底クラス

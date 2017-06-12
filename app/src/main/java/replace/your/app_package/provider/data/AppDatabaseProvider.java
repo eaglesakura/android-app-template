@@ -1,4 +1,4 @@
-package replace.your.app_package.provider;
+package replace.your.app_package.provider.data;
 
 import com.eaglesakura.sloth.provider.ContextProvider;
 import com.eaglesakura.android.garnet.Provide;
@@ -6,7 +6,7 @@ import com.eaglesakura.thread.LazyObjectHolder1;
 
 import android.content.Context;
 
-import replace.your.app_package.data.db.AppDatabase;
+import replace.your.app_package.repository.db.AppDatabase;
 
 /**
  * DBの依存管理を行う
