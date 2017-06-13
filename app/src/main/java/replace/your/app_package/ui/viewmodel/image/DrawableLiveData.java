@@ -6,7 +6,6 @@ import com.eaglesakura.cerberus.ExecuteTarget;
 import com.eaglesakura.lambda.Action2;
 import com.eaglesakura.lambda.CancelCallback;
 import com.eaglesakura.sloth.app.lifecycle.Lifecycle;
-import com.eaglesakura.sloth.app.lifecycle.LimitedSlothLiveData;
 import com.eaglesakura.sloth.app.lifecycle.SlothLiveData;
 import com.eaglesakura.sloth.data.SupportCancelCallbackBuilder;
 import com.eaglesakura.sloth.graphics.SyncImageLoader;
@@ -23,7 +22,7 @@ import replace.your.app_package.util.AppLog;
  *
  * キャッシュは {@link AppImageViewModel} で共用される。
  */
-public class DrawableLiveData extends LimitedSlothLiveData<Drawable> {
+public class DrawableLiveData extends SlothLiveData<Drawable> {
 
     /**
      * キャンセルチェック

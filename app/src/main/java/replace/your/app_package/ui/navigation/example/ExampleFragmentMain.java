@@ -7,6 +7,7 @@ import com.eaglesakura.android.margarine.OnClick;
 import com.eaglesakura.android.util.AndroidThreadUtil;
 import com.eaglesakura.sloth.annotation.FragmentLayout;
 import com.eaglesakura.sloth.ui.license.LicenseViewActivity;
+import com.eaglesakura.sloth.util.LiveDataObservers;
 import com.eaglesakura.sloth.util.LiveDataUtil;
 
 import android.net.Uri;
@@ -56,9 +57,9 @@ public class ExampleFragmentMain extends AppNavigationFragment {
 
         mImageViewModel.getFromUri(Uri.parse("https://developer.android.com/images/home/nougat_bg_2x.jpg"))
                 .builder((data, builder) -> builder.errorImage(android.R.drawable.alert_dark_frame, true))
-                .observe(getLifecycle(), image -> {
+                .observe(getLifecycle(), LiveDataObservers.single(image -> {
                     AppLog.test("loaded image size[%d x %d]", image.getMinimumWidth(), image.getMinimumHeight());
-                });
+                }));
 
         // 非同期テスト
         mAsyncDataViewModel.getAsyncCounter().observe(getLifecycle(), time -> {
@@ -71,7 +72,7 @@ public class ExampleFragmentMain extends AppNavigationFragment {
             AppLog.test("observeCurrentForeground[%d]", time);
         });
 
-        mAsyncDataViewModel.getAsyncCounter().observeCurrentForeground(getLifecycle(), LiveDataUtil.singleObserver(time -> {
+        mAsyncDataViewModel.getAsyncCounter().observeCurrentForeground(getLifecycle(), LiveDataObservers.single(time -> {
             AndroidThreadUtil.assertUIThread();
             AppLog.test("single/observeCurrentForeground[%d]", time);
         }));
