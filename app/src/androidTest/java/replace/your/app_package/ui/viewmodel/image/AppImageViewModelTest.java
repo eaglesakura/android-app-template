@@ -40,7 +40,7 @@ public class AppImageViewModelTest extends AppDeviceTestCase {
             UIHandler.postWithWait(lifecycle::onCreate, () -> false);
 
             DrawableLiveData liveData = instance.getFromUri(Uri.parse("https://developer.android.com/images/home/nougat_bg_2x.jpg"));
-            liveData.observeAlive(lifecycle, image -> {
+            liveData.observe(lifecycle, image -> {
                 validate(image.getMinimumWidth()).from(1);
                 validate(image.getMinimumHeight()).from(1);
             });

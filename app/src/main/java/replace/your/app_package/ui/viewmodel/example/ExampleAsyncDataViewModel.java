@@ -1,5 +1,7 @@
 package replace.your.app_package.ui.viewmodel.example;
 
+import com.eaglesakura.cerberus.CallbackTime;
+import com.eaglesakura.cerberus.ExecuteTarget;
 import com.eaglesakura.sloth.app.lifecycle.GarnetViewModel;
 
 /**
@@ -9,19 +11,37 @@ import com.eaglesakura.sloth.app.lifecycle.GarnetViewModel;
  */
 public class ExampleAsyncDataViewModel extends GarnetViewModel {
 
-    AsyncTimeData mAsyncTimeData;
+    AsyncCounter mAsyncCounter;
 
     public ExampleAsyncDataViewModel() {
     }
 
     @Override
     protected void onInitialize() {
-        mAsyncTimeData = new AsyncTimeData();
+        mAsyncCounter = new AsyncCounter();
 
-        registerLiveData(mAsyncTimeData);
+        registerLiveData(mAsyncCounter);
     }
 
-    public AsyncTimeData getAsyncTimeData() {
-        return mAsyncTimeData;
+    @Override
+    protected void onActive() {
+        super.onActive();
+        getLifecycle().async(ExecuteTarget.LocalQueue, CallbackTime.CurrentForeground, task -> {
+            for (int i = 0; i < 5; ++i) {
+                task.waitTime(1000);
+                task.throwIfCanceled();
+                mAsyncCounter.increment();
+            }
+            return this;
+        });
+    }
+
+    @Override
+    protected void onInactive() {
+        super.onInactive();
+    }
+
+    public AsyncCounter getAsyncCounter() {
+        return mAsyncCounter;
     }
 }

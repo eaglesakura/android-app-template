@@ -6,7 +6,7 @@ import com.eaglesakura.sloth.app.lifecycle.SlothLiveData;
 /**
  * 非同期実行している時間を保存するLiveData
  */
-public class AsyncTimeData extends SlothLiveData<Integer> {
+public class AsyncCounter extends SlothLiveData<Integer> {
     ServiceLifecycle mLifecycle;
 
     @Override
@@ -33,5 +33,14 @@ public class AsyncTimeData extends SlothLiveData<Integer> {
         super.onInactive();
         mLifecycle.onDestroy();
         mLifecycle = null;
+    }
+
+    void increment() {
+        Integer value = getValue();
+        if (value == null) {
+            postValue(0);
+        } else {
+            postValue(value + 1);
+        }
     }
 }

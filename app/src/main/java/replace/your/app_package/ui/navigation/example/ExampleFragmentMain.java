@@ -56,22 +56,22 @@ public class ExampleFragmentMain extends AppNavigationFragment {
 
         mImageViewModel.getFromUri(Uri.parse("https://developer.android.com/images/home/nougat_bg_2x.jpg"))
                 .builder((data, builder) -> builder.errorImage(android.R.drawable.alert_dark_frame, true))
-                .observe(getLifecycle().getLifecycleRegistry(), image -> {
+                .observe(getLifecycle(), image -> {
                     AppLog.test("loaded image size[%d x %d]", image.getMinimumWidth(), image.getMinimumHeight());
                 });
 
         // 非同期テスト
-        mAsyncDataViewModel.getAsyncTimeData().observe(getLifecycle().getLifecycleRegistry(), time -> {
+        mAsyncDataViewModel.getAsyncCounter().observe(getLifecycle(), time -> {
             AndroidThreadUtil.assertUIThread();
             AppLog.test("observeAlive[%d]", time);
         });
 
-        mAsyncDataViewModel.getAsyncTimeData().observeCurrentForeground(getLifecycle(), time -> {
+        mAsyncDataViewModel.getAsyncCounter().observeCurrentForeground(getLifecycle(), time -> {
             AndroidThreadUtil.assertUIThread();
             AppLog.test("observeCurrentForeground[%d]", time);
         });
 
-        mAsyncDataViewModel.getAsyncTimeData().observeCurrentForeground(getLifecycle(), LiveDataUtil.singleObserver(time -> {
+        mAsyncDataViewModel.getAsyncCounter().observeCurrentForeground(getLifecycle(), LiveDataUtil.singleObserver(time -> {
             AndroidThreadUtil.assertUIThread();
             AppLog.test("single/observeCurrentForeground[%d]", time);
         }));
