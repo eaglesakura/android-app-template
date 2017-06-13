@@ -28,7 +28,7 @@ public class AppImageViewModel extends GarnetViewModel {
      * データは可能な限りキャッシュされる。
      */
     public DrawableLiveData getFromUri(@NonNull Uri uri) {
-        DrawableLiveData result = new DrawableLiveData(mImageLoader, uri);
+        DrawableLiveData result = new DrawableLiveData(getLifecycle(), mImageLoader, uri);
         return result;
     }
 }

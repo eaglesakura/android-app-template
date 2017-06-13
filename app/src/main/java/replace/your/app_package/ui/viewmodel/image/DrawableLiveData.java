@@ -3,19 +3,17 @@ package replace.your.app_package.ui.viewmodel.image;
 import com.eaglesakura.cerberus.BackgroundTask;
 import com.eaglesakura.cerberus.CallbackTime;
 import com.eaglesakura.cerberus.ExecuteTarget;
-import com.eaglesakura.lambda.Action1;
 import com.eaglesakura.lambda.Action2;
 import com.eaglesakura.lambda.CancelCallback;
+import com.eaglesakura.sloth.app.lifecycle.Lifecycle;
+import com.eaglesakura.sloth.app.lifecycle.LimitedSlothLiveData;
 import com.eaglesakura.sloth.app.lifecycle.SlothLiveData;
 import com.eaglesakura.sloth.data.SupportCancelCallbackBuilder;
 import com.eaglesakura.sloth.graphics.SyncImageLoader;
 
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
-
-import java.io.IOException;
 
 import replace.your.app_package.repository.AppImageRepository;
 import replace.your.app_package.util.AppLog;
@@ -25,31 +23,34 @@ import replace.your.app_package.util.AppLog;
  *
  * キャッシュは {@link AppImageViewModel} で共用される。
  */
-public class DrawableLiveData extends SlothLiveData<Drawable> {
+public class DrawableLiveData extends LimitedSlothLiveData<Drawable> {
 
     /**
      * キャンセルチェック
      */
-    CancelCallback mCancelCallback;
+    private CancelCallback mCancelCallback;
 
     /**
      * ロード対象のURI
      */
     @NonNull
-    Uri mUri;
+    private Uri mUri;
 
     /**
      * ローダー本体
      */
-    AppImageRepository mImageRepository;
+    private AppImageRepository mImageRepository;
 
     /**
      * Builderの制御を行う
      */
-    Action2<DrawableLiveData, AppImageRepository.Builder> mBuilderAction;
+    private Action2<DrawableLiveData, AppImageRepository.Builder> mBuilderAction;
 
-    DrawableLiveData(AppImageRepository repository, Uri uri) {
+    Lifecycle mLifecycle;
+
+    DrawableLiveData(Lifecycle lifecycle, AppImageRepository repository, Uri uri) {
         mUri = uri;
+        mLifecycle = lifecycle;
         mImageRepository = repository;
     }
 
@@ -65,7 +66,7 @@ public class DrawableLiveData extends SlothLiveData<Drawable> {
     /**
      * キャンセルコールバックをデフォルト以外で指定する
      */
-    public DrawableLiveData setCancelCallback(CancelCallback cancelCallback) {
+    public DrawableLiveData cancelSignal(CancelCallback cancelCallback) {
         mCancelCallback = cancelCallback;
         return this;
     }
@@ -85,7 +86,12 @@ public class DrawableLiveData extends SlothLiveData<Drawable> {
     @Override
     protected void onActive() {
         super.onActive();
-        getLifecycle().async(ExecuteTarget.LocalParallel, CallbackTime.Alive, (BackgroundTask<Drawable> task) -> {
+
+        if (getValue() != null) {
+            return;
+        }
+
+        mLifecycle.async(ExecuteTarget.LocalParallel, CallbackTime.Alive, (BackgroundTask<Drawable> task) -> {
             return loadImage(SupportCancelCallbackBuilder.from(task));
         }).completed((result, task) -> {
             setValue(result);

@@ -19,11 +19,11 @@ public class AppViewModelProvider extends GarnetViewModelProvider {
 
     @Provide
     public AppImageViewModel provideImageViewModel() {
-        return ViewModelProviders.of(getActivity()).get(AppImageViewModel.class);
+        return getViewModelFromActivity(AppImageViewModel.class);
     }
 
     @Provide
     public ExampleAsyncDataViewModel provideExampleAsyncDataViewModel() {
-        return ViewModelProviders.of(getActivity()).get(ExampleAsyncDataViewModel.class);
+        return getViewModelFromActivity(ExampleAsyncDataViewModel.class);
     }
 }

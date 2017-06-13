@@ -7,8 +7,8 @@ import com.eaglesakura.android.margarine.OnClick;
 import com.eaglesakura.android.util.AndroidThreadUtil;
 import com.eaglesakura.sloth.annotation.FragmentLayout;
 import com.eaglesakura.sloth.ui.license.LicenseViewActivity;
+import com.eaglesakura.sloth.util.LiveDataUtil;
 
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -56,20 +56,25 @@ public class ExampleFragmentMain extends AppNavigationFragment {
 
         mImageViewModel.getFromUri(Uri.parse("https://developer.android.com/images/home/nougat_bg_2x.jpg"))
                 .builder((data, builder) -> builder.errorImage(android.R.drawable.alert_dark_frame, true))
-                .observeForeground(getLifecycle(), image -> {
-                    AppLog.test("loaded image size[%d x %d]", image.getBounds().width(), image.getBounds().height());
+                .observe(getLifecycle().getLifecycleRegistry(), image -> {
+                    AppLog.test("loaded image size[%d x %d]", image.getMinimumWidth(), image.getMinimumHeight());
                 });
 
         // 非同期テスト
-        mAsyncDataViewModel.getAsyncTimeData().observeAlive(getLifecycle(), time -> {
+        mAsyncDataViewModel.getAsyncTimeData().observe(getLifecycle().getLifecycleRegistry(), time -> {
             AndroidThreadUtil.assertUIThread();
             AppLog.test("observeAlive[%d]", time);
         });
 
-        mAsyncDataViewModel.getAsyncTimeData().observeForeground(getLifecycle(), time -> {
+        mAsyncDataViewModel.getAsyncTimeData().observeCurrentForeground(getLifecycle(), time -> {
             AndroidThreadUtil.assertUIThread();
-            AppLog.test("observeForeground[%d]", time);
+            AppLog.test("observeCurrentForeground[%d]", time);
         });
+
+        mAsyncDataViewModel.getAsyncTimeData().observeCurrentForeground(getLifecycle(), LiveDataUtil.singleObserver(time -> {
+            AndroidThreadUtil.assertUIThread();
+            AppLog.test("single/observeCurrentForeground[%d]", time);
+        }));
     }
 
     @Nullable

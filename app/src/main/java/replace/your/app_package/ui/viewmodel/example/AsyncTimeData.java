@@ -1,20 +1,28 @@
 package replace.your.app_package.ui.viewmodel.example;
 
+import com.eaglesakura.sloth.app.lifecycle.ServiceLifecycle;
 import com.eaglesakura.sloth.app.lifecycle.SlothLiveData;
-import com.eaglesakura.util.Timer;
 
 /**
  * 非同期実行している時間を保存するLiveData
  */
 public class AsyncTimeData extends SlothLiveData<Integer> {
+    ServiceLifecycle mLifecycle;
+
     @Override
     protected void onActive() {
         super.onActive();
-        getLifecycle().asyncQueue(task -> {
-            Timer timer = new Timer();
+        mLifecycle = new ServiceLifecycle();
+        mLifecycle.onCreate();
+        mLifecycle.asyncQueue(task -> {
             for (int i = 0; i < 10; ++i) {
                 task.waitTime(1000);
-                postValue((int) timer.end());
+                Integer value = getValue();
+                if (value == null) {
+                    value = 0;
+                }
+                task.throwIfCanceled();
+                postValue(value + 1);
             }
             return this;
         }).start();
@@ -23,5 +31,7 @@ public class AsyncTimeData extends SlothLiveData<Integer> {
     @Override
     protected void onInactive() {
         super.onInactive();
+        mLifecycle.onDestroy();
+        mLifecycle = null;
     }
 }
