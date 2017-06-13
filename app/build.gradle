@@ -86,7 +86,7 @@ dependencies {
          * 標準フレームワーク
          * FIXME: フレームワークを適切なバージョンに切り替える
          */
-        implementation "com.eaglesakura:greendao-wrapper:2.3.0"
+        implementation "com.eaglesakura:greendao-wrapper:2.4.0"
         implementation "com.eaglesakura:sloth-framework:4.0.build-34"
 
         /**
