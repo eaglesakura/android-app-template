@@ -101,7 +101,7 @@ dependencies {
         /**
          * UnitTest
          */
-        androidTestImplementation("com.eaglesakura:android-devicetest-support:2.3.0") {
+        androidTestImplementation("com.eaglesakura:android-devicetest-support:2.3.1") {
             exclude(group: "com.eaglesakura", module: "java-commons")
             exclude(group: "com.eaglesakura", module: "android-commons")
             exclude(group: "com.android.support")
