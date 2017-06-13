@@ -14,7 +14,6 @@ import replace.your.app_package.ui.viewmodel.example.ExampleAsyncDataViewModel;
 
 import static com.eaglesakura.android.devicetest.scenario.ScenarioContext.assertTopActivity;
 import static com.eaglesakura.android.devicetest.scenario.ScenarioContext.findViewById;
-import static com.eaglesakura.android.devicetest.scenario.ScenarioContext.getFragment;
 import static com.eaglesakura.android.devicetest.scenario.ScenarioContext.getTopActivity;
 import static junit.framework.Assert.assertEquals;
 
