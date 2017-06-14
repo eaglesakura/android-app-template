@@ -14,7 +14,7 @@
 | 想定される開発ブランチ | 内容 | ビルドステータス |
 |---|---|---|
 | master | 最新ビルド（Nightly Build対象） | [![CircleCI](https://circleci.com/gh/eaglesakura/android-app-template/tree/master.svg?style=svg)](https://circleci.com/gh/eaglesakura/android-app-template/tree/master) |
-| develop | 最新の開発版, DEBUG版デプロイ用 | ![CircleCI](https://circleci.com/gh/eaglesakura/android-app-template/tree/develop.svg?style=svg)](https://circleci.com/gh/eaglesakura/android-app-template/tree/develop) |
+| develop | 最新の開発版, DEBUG版デプロイ用 |  [![CircleCI](https://circleci.com/gh/eaglesakura/android-app-template/tree/develop.svg?style=svg)](https://circleci.com/gh/eaglesakura/android-app-template/tree/develop) |
 | feature/id/{issue num} | issue対応 | - |
 | v${バージョン名} | リリースビルド | - |
 
@@ -68,11 +68,7 @@ git remote add origin git@your-repository.git
 
 ### ビルド手順
 
-<pre>
-
-# Android SDKの内容を同期する
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/eaglesakura/build-dependencies/master/android-sdk.sh)"
-
+```
 # リポジトリをcloneしてビルド用ブランチへ移動する
 git checkout develop
 
@@ -84,8 +80,9 @@ chmod 755 ./gradlew
 ./script/developer-install-private.sh
 
 # ビルドを行う
-./gradlew --refresh-dependencies assemble
-</pre>
+./gradlew assemble
+
+```
 
 ## 導入済みプラグイン
 
@@ -93,7 +90,7 @@ chmod 755 ./gradlew
 
 `generator.gradle` の `androidGenerateProperties` タスクで生成される。
 
-`app/config/app_properties.json` にアプリで保存するKey-Valueリストを記述し、下記のコマンドを実行することで自動的に設定保存クラスを生成できる。
+`app/config/app_properties.yaml` にアプリで保存するKey-Valueリストを記述し、下記のコマンドを実行することで自動的に設定保存クラスを生成できる。
 
 アプリはPreferenceを使うことを推奨しない。これは、複数Processで起動した際にPreferenceのSetが反映されない場合があるため。
 
@@ -121,20 +118,6 @@ FirebaseRemoteConfigにアクセスするためのUtilクラスを生成する�
 ./gradlew :app:generateFirebaseConfig
 ```
 
-### geenDAO Data Access Object(DAO)生成
-
-`generator.gradle` の `generateDao` タスクで生成される。
-
-greenDAOは性質上、事前にJavaプログラムからDAO生成を必須となる。
-新規にJavaプログラムを書くのは手間なので、生成用のTaskをデフォルトで用意している。
-
-```
-# app/src/main/gen/java 配下に設定クラスが出力される。
-# 設定は generator.gradle に記述されている
-
-./gradlew :app:generateDao
-```
-
 ### mipmap用画像ファイル自動生成
 
 `generator.gradle` の `androidBuildMipmap` タスクで生成される。
@@ -148,14 +131,9 @@ greenDAOは性質上、事前にJavaプログラムからDAO生成を必須と�
 ./gradlew :app:androidBuildMipmap
 ```
 
-### Dexメソッド数カウント
-
-`app/build.gradle`に記述されている。
-
 ### Slack通知
 
 `app/build.gradle`に記述されている。`SLACK_HOOK_URL`の環境変数が設定されている場合、ビルド状況をSlackへ通知する。
-
 
 ## ライセンス
 

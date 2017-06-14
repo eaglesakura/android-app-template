@@ -30,7 +30,8 @@ mipmap {
  */
 props {
     output file("src/main/gen/java")
-    property file("config/app_properties.json"), "replace.your.app_package.gen.prop"
+    configOutput file("src/main/res/raw")
+    property file("config/app_properties.yaml"), "replace.your.app_package.gen.prop"
 }
 
 /**

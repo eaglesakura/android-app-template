@@ -46,10 +46,10 @@ public class ExampleFragmentMain extends AppNavigationFragment {
     @Bind(R.id.Example_Item_Debuggable)
     SwitchCompat mDebugSwitch;
 
-    @Inject(AppViewModelProvider.class)
+    @Inject(ExampleAppViewModelProvider.class)
     ExampleAsyncDataViewModel mAsyncDataViewModel;
 
-    @Inject(ExampleAppViewModelProvider.class)
+    @Inject(AppViewModelProvider.class)
     AppImageViewModel mImageViewModel;
 
     @Override

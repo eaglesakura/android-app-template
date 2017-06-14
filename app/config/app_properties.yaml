@@ -1,0 +1,25 @@
+groups:
+  # デバッグ管理
+  - name: DebugProps
+    properties:
+        - type: boolean
+          name: debugEnable
+          value: false
+  # その他サンプル
+  - name: ExampleProps
+    properties:
+        - type: boolean
+          name: boolValue
+          value: false
+        - type: int
+          name: intValue
+          value: 12345
+        - type: double
+          name: doubleValue
+          value: 1.234
+        - type: String
+          name: stringValue
+          value: "this,is,sample"
+        - type: byte[]
+          name: byteArrayValue
+          value: null

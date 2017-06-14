@@ -9,6 +9,7 @@ import android.app.Activity;
 import junit.framework.Assert;
 import replace.your.app_package.AppScenarioTest;
 import replace.your.app_package.provider.AppViewModelProvider;
+import replace.your.app_package.provider.ExampleAppViewModelProvider;
 import replace.your.app_package.ui.navigation.example.ExampleFragmentMain;
 import replace.your.app_package.ui.viewmodel.example.ExampleAsyncDataViewModel;
 
@@ -30,8 +31,8 @@ public class ExampleActivityTest extends AppScenarioTest<ExampleActivity> {
 
     @Test
     public void 同じActivityから同じViewModelが取得できる() throws Throwable {
-        ExampleAsyncDataViewModel instance0 = Garnet.factory(AppViewModelProvider.class).depend(Activity.class, getTopActivity()).instance(ExampleAsyncDataViewModel.class);
-        ExampleAsyncDataViewModel instance1 = Garnet.factory(AppViewModelProvider.class).depend(Activity.class, getTopActivity()).instance(ExampleAsyncDataViewModel.class);
+        ExampleAsyncDataViewModel instance0 = Garnet.factory(ExampleAppViewModelProvider.class).depend(Activity.class, getTopActivity()).instance(ExampleAsyncDataViewModel.class);
+        ExampleAsyncDataViewModel instance1 = Garnet.factory(ExampleAppViewModelProvider.class).depend(Activity.class, getTopActivity()).instance(ExampleAsyncDataViewModel.class);
         assertEquals(instance0, instance1);
     }
 }
