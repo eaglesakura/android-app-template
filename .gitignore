@@ -25,3 +25,4 @@ latex/
 private/
 eglibrary/
 dependencies.txt
+*.hprof

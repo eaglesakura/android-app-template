@@ -30,6 +30,10 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.0.0-alpha1"
     annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha1"
 
+    // Room O/R Mapper
+    implementation "android.arch.persistence.room:runtime:1.0.0-alpha1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0-alpha1"
+
     /**
      * Play Service
      * https://developers.google.com/android/guides/overview
@@ -227,11 +231,8 @@ android {
     }
 
     sourceSets {
-        main {
-            java.srcDirs += [
-                    'src/main/gen/java',
-            ]
-        }
+        main.java.srcDirs += 'src/main/gen/java'
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())   // Room generated
     }
 
     /**

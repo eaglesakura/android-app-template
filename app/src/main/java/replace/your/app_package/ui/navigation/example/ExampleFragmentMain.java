@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 
 import replace.your.app_package.R;
 import replace.your.app_package.provider.AppViewModelProvider;
+import replace.your.app_package.provider.ExampleAppViewModelProvider;
 import replace.your.app_package.repository.AppSettings;
 import replace.your.app_package.provider.AppContextProvider;
 import replace.your.app_package.ui.navigation.base.AppNavigationFragment;
@@ -48,7 +49,7 @@ public class ExampleFragmentMain extends AppNavigationFragment {
     @Inject(AppViewModelProvider.class)
     ExampleAsyncDataViewModel mAsyncDataViewModel;
 
-    @Inject(AppViewModelProvider.class)
+    @Inject(ExampleAppViewModelProvider.class)
     AppImageViewModel mImageViewModel;
 
     @Override
