@@ -36,7 +36,7 @@ deployment:
     branch: develop
     commands:
       - ./gradlew :app:dependencyUpdates
-      - ./script/circle/deploy-deploygate.sh ## skip
+#      - ./script/circle/deploy-deploygate.sh
       - cp -r ./ci-release $CIRCLE_ARTIFACTS
   nightly:
     branch: master
@@ -47,5 +47,5 @@ deployment:
     branch: /^v[0-9]\..*$/
     commands:
       - ./gradlew :app:dependencyUpdates
-      - ./script/circleci-deploy-deploygate.sh ## skip
+#      - ./script/circleci-deploy-deploygate.sh
       - cp -r ./ci-release $CIRCLE_ARTIFACTS
