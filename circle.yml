@@ -1,10 +1,5 @@
 checkout:
   post:
-    - chmod 755 ./gradlew
-    - chmod 755 ./script/circle/assemble.sh
-    - chmod 755 ./script/circle/test.sh
-    - chmod 755 ./script/circle/deploy-deploygate.sh
-    - chmod 755 ./script/developer-install-private.sh
 # 必要に応じてSubmoduleを同期する
 #    - git submodule update --init
 machine:
@@ -20,14 +15,18 @@ dependencies:
   cache_directories:
     - "/home/ubuntu/android-sdk"
   override:
-    - sh -c "$(curl -fsSL https://raw.githubusercontent.com/eaglesakura/build-dependencies/master/circleci/install-android-sdk-auto.sh)"
-    - sh -c "$(curl -fsSL https://raw.githubusercontent.com/eaglesakura/build-dependencies/master/circleci/install-android-extra-repo.sh)"
-    - ./script/developer-install-private.sh
-    - ./gradlew :app:dependencies
+    - |
+      chmod 755 ./gradlew
+      chmod 755 -R ./script
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/eaglesakura/build-dependencies/master/circleci/install-android-sdk-auto.sh)"
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/eaglesakura/build-dependencies/master/circleci/install-android-extra-repo.sh)"
+      ./script/developer-install-private.sh
+      ./gradlew :app:dependencies
 test:
   override:
-    - ./script/circle/assemble.sh
-    - ./script/circle/test.sh
+    - |
+      ./script/circle/assemble.sh
+      ./script/circle/test.sh
 deployment:
   feature:
     branch: /^feature\/id\/.*$/
@@ -36,17 +35,20 @@ deployment:
   develop:
     branch: develop
     commands:
-      - ./gradlew :app:dependencyUpdates
-#      - ./script/circle/deploy-deploygate.sh
-      - cp -r ./ci-release $CIRCLE_ARTIFACTS
+      - |
+        ./gradlew :app:dependencyUpdates
+#        ./script/circle/deploy-deploygate.sh
+        cp -r ./ci-release $CIRCLE_ARTIFACTS
   nightly:
     branch: master
     commands:
-      - ./gradlew :app:dependencyUpdates
-      - cp -r ./ci-release $CIRCLE_ARTIFACTS
+      - |
+        ./gradlew :app:dependencyUpdates
+        cp -r ./ci-release $CIRCLE_ARTIFACTS
   release:
     branch: /^v[0-9]\..*$/
     commands:
-      - ./gradlew :app:dependencyUpdates
-#      - ./script/circleci-deploy-deploygate.sh
-      - cp -r ./ci-release $CIRCLE_ARTIFACTS
+      - |
+        ./gradlew :app:dependencyUpdates
+#        ./script/circleci-deploy-deploygate.sh
+        cp -r ./ci-release $CIRCLE_ARTIFACTS
