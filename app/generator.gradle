@@ -45,22 +45,3 @@ task generateFirebaseConfig(type: com.eaglesakura.sloth.firebase.FirebaseRemoteC
     AppStatusConfig.intConfig("intConfig", 0);                  // int値
     AppStatusConfig.booleanConfig("booleanConfig", false);      // bool値
 }
-
-/**
- * greenDAOのData Access Object(HogeDao/DaoMaster)を生成する
- */
-task generateDao(type: com.eaglesakura.sloth.dao.AndroidDaoGenTask) {
-    outDirectory = file("src/main/gen/java")
-    classPackageBase = "${android.defaultConfig.applicationId}.gen.dao"
-
-    def schema = newSchema(1, "example");
-
-    /**
-     * 表示スロットと表示内容(対象プラグイン、表示ID)を紐付ける
-     *
-     * packageName + slotIdで一意に識別される
-     */
-    def DbExample = schema.addEntity("DbExample");
-    DbExample.addStringProperty("uniqueId").notNull().unique().index().primaryKey();
-    DbExample.addDateProperty("updatedDate").notNull();    // 更新日時
-}

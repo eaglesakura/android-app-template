@@ -3,8 +3,8 @@
 # ビルド
 # ビルド対象のコマンドは適宜設定する
 ./gradlew \
-          :app:assembleDevelopDebug \
-          :app:assembleProductRelease \
-          :app:assembleDevelopDebugAndroidTest \
+          :app:assembleTerminalDebug \
+          :app:assembleTerminalRelease \
+          :app:assembleTerminalDebugAndroidTest \
           ciCollectAndroidApps
 #          :app:assembleGoogleplayDebug :app:assembleGoogleplayRelease

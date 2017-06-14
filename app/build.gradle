@@ -88,10 +88,9 @@ dependencies {
     if (!EGLIBRARY_COMPILE_LOCAL) {
         /**
          * 標準フレームワーク
-         * FIXME: フレームワークを適切なバージョンに切り替える
+         * FIXME: フレームワークを適切な安定バージョンに切り替える
          */
-        implementation "com.eaglesakura:greendao-wrapper:2.4.0"
-        implementation "com.eaglesakura:sloth-framework:4.0.build-34"
+        implementation "com.eaglesakura:sloth-framework:4.0.build-35"
 
         /**
          * Optional
@@ -122,7 +121,6 @@ dependencies {
          * 標準フレームワーク
          */
         implementation project(":eglibrary:sloth-framework")
-        implementation project(":eglibrary:greendao-wrapper")   // TODO: Roomに移行する
 
         // 2階層依存
         implementation project(":eglibrary:android-commons")
@@ -256,15 +254,17 @@ android {
 
     /**
      * ビルドフレーバー種別一覧
+     *
+     * ide: 開発/ビルド環境
      */
-    flavorDimensions "machine"
+    flavorDimensions "ide"
 
     productFlavors {
         /**
          * Android Studioでのローカルビルド設定
          */
-        develop {
-            dimension "machine"
+        studio {
+            dimension "ide"
 
             minSdkVersion 21
 
@@ -277,10 +277,10 @@ android {
         /**
          * デプロイ / ビルドマシン用設定
          */
-        product {
-            dimension "machine"
+        terminal {
+            dimension "ide"
 
-            /**
+            /**p
              * 日本語と英語リソースのみを残す
              */
             resConfigs "en", "ja"
