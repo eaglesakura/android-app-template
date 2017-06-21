@@ -91,7 +91,7 @@ dependencies {
          * 標準フレームワーク
          * FIXME: フレームワークを適切な安定バージョンに切り替える
          */
-        implementation "com.eaglesakura:sloth-framework:4.0.build-35"
+        implementation "com.eaglesakura:sloth-framework:4.0.build-37"
 
         /**
          * Optional
