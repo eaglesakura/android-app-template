@@ -70,7 +70,7 @@ public class DrawableLiveData extends SlothLiveData<Drawable> {
         return this;
     }
 
-    protected Drawable loadImage(SupportCancelCallbackBuilder cancelCallbackBuilder) throws Throwable {
+    protected Drawable loadImage(SupportCancelCallbackBuilder cancelCallbackBuilder) throws Exception {
         if (mCancelCallback != null) {
             cancelCallbackBuilder.or(mCancelCallback);
         }

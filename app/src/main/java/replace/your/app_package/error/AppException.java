@@ -28,18 +28,18 @@ public class AppException extends Exception {
         super(cause);
     }
 
-    static Throwable getInternal(Throwable e) {
+    static Exception getInternal(Exception e) {
         // RuntimeExceptionでラップされている場合、内部を確認する
         if (e instanceof RuntimeException) {
             while (e.getCause() != null && !(e.getCause() instanceof RuntimeException)) {
-                e = e.getCause();
+                e = ((Exception) e.getCause());
             }
         }
 
         return e;
     }
 
-    public static void throwAppException(Throwable e) throws AppException {
+    public static void throwAppException(Exception e) throws AppException {
         // RuntimeExceptionでラップされている場合、内部を確認する
         e = getInternal(e);
 
@@ -56,7 +56,7 @@ public class AppException extends Exception {
         }
     }
 
-    public static void throwAppExceptionOrTaskCanceled(Throwable e) throws TaskCanceledException, AppException {
+    public static void throwAppExceptionOrTaskCanceled(Exception e) throws TaskCanceledException, AppException {
         // RuntimeExceptionでラップされている場合、内部を確認する
         e = getInternal(e);
 

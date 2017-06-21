@@ -8,7 +8,7 @@ buildscript {
 
     dependencies {
         // Build Plugins
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha3'    // Android Studioバージョンにリンクする
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha4'    // Android Studioバージョンにリンクする
         classpath 'com.google.gms:google-services:3.0.0'
         classpath "com.eaglesakura:plugin-ci-support:1.2.200"
 
@@ -19,7 +19,7 @@ buildscript {
         // Notifications
 //        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.4'
         classpath 'com.github.operando:gradle-slack-plugin:1.2.0'   // https://jitpack.io
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
 
         // Deploy
         classpath 'com.deploygate:gradle:0.6'

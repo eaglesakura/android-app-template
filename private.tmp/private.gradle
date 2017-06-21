@@ -1,5 +1,3 @@
-ext.DEVELOER_ANDROID_DEX_MAXHEAP = "8g"
-ext.DEVELOER_ANDROID_DEX_MAXPROCESS = 4
 ext.DEVELOER_TARGET_RESOURCE_DPI = "xxhdpi"
 
 /**
@@ -55,7 +53,7 @@ ext.EGLIBRARY_COMPILE_PROJECT_ANDROID_FRAMEWORK_PLAYSERVICE = true
 // 強制的にコンパイル済Jarを使用する
 if ("true" == "${System.properties["app.lib_no_compile"]}") {
     println("Libs, Using maven repository")
-    ext.EGLIBRARY_COMPILE_LOCAL = false;
+    ext.EGLIBRARY_COMPILE_LOCAL = false
 } else {
     println("Libs, Using local projects, using maven -> `-Dapp.lib_no_compile=true`")
 }

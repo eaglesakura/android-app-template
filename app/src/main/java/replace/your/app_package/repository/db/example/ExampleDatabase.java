@@ -10,7 +10,10 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.Query;
 
+import java.util.Iterator;
 import java.util.List;
+
+import io.reactivex.Flowable;
 
 @Database(entities = {ExampleDatabase.ToDo.class, ExampleDatabase.User.class}, version = 1)
 public abstract class ExampleDatabase extends SlothRoomDatabase {
@@ -30,6 +33,18 @@ public abstract class ExampleDatabase extends SlothRoomDatabase {
                 "JOIN\n" +
                 "\tUSER ON TODO.USER_ID = USER.USER_ID\n")
         List<TodoCard> listTodoCards();
+
+        /**
+         * MEMO: ALPHA1ではAS文を利用するとビルドが止まらなくなるため注意が必要
+         */
+        @Query("SELECT\n" +
+                "\tTODO.TITLE,\n" +
+                "\tUSER.NAME\n" +
+                "FROM\n" +
+                "\tTODO\n" +
+                "JOIN\n" +
+                "\tUSER ON TODO.USER_ID = USER.USER_ID\n")
+        Flowable<TodoCard> listTodoCardsEx();
 
         @Insert
         void insert(ToDo... todo);

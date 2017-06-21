@@ -7,6 +7,7 @@ import android.arch.persistence.room.Room;
 import java.io.Closeable;
 import java.util.List;
 
+import io.reactivex.Flowable;
 import replace.your.app_package.AppUnitTestCase;
 
 public class ExampleDatabaseTest extends AppUnitTestCase {
@@ -57,6 +58,15 @@ public class ExampleDatabaseTest extends AppUnitTestCase {
 
             assertEquals(card.title, "example");
             assertEquals(card.NAME, "user1");
+        }
+
+
+        try (Closeable token = database.open()) {
+            Flowable<ExampleDatabase.TodoCard> todoCards = dao.listTodoCardsEx();
+            todoCards.subscribe(card -> {
+                assertEquals(card.title, "example");
+                assertEquals(card.NAME, "user1");
+            });
         }
     }
 }
