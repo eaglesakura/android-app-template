@@ -24,9 +24,8 @@ dependencies:
     - ./gradlew :app:dependencies
 test:
   override:
-    - |
-      ./script/circle/assemble.sh
-      ./script/circle/test.sh
+    - ./script/circle/assemble.sh
+    - ./script/circle/test.sh
 deployment:
   feature:
     branch: /^feature\/id\/.*$/
